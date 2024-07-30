@@ -1,0 +1,41 @@
+{
+	"name": "oceancodex/wpsp-console",
+	"version": "8.2.0",
+	"description": "WordPress Starter Plugin - Console",
+	"keywords": [
+	],
+	"license": "MIT",
+	"require": {
+		"php": "^8.2",
+		"symfony/console": "^v7.1.3"
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"autoload": {
+		"psr-4": {
+			"WPSPCORE\\Console\\": "src/"
+		},
+		"files": [
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"WPSPCORE\\Console\\Tests\\": "tests/"
+		}
+	},
+	"authors": [
+		{
+			"name": "OceanCodex",
+			"email": "contact@oceancodex.com"
+		}
+	],
+	"scripts": {
+		"post-autoload-dump": [
+		],
+		"post-root-package-install": [
+		],
+		"post-create-project-cmd": [
+		]
+	}
+}
