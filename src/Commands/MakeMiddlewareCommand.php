@@ -50,7 +50,7 @@ class MakeMiddlewareCommand extends Command {
 		$content = FileSystem::get(__DIR__ . '/../Stubs/Middleware/middleware.stub');
 		$content = str_replace('{{ className }}', $name, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Http/Middleware/'. $name . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Http/Middleware/' . $name . '.php', $content);
 
 		// Output message.
 		$output->writeln('Created new middleware: "' . $name . '"');

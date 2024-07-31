@@ -29,7 +29,7 @@ class MakeTemplateCommand extends Command {
 		$helper = $this->getHelper('question');
 		if (!$name) {
 			$nameQuestion = new Question('Please enter the name of the template: ');
-			$name = $helper->ask($input, $output, $nameQuestion);
+			$name         = $helper->ask($input, $output, $nameQuestion);
 
 			if (empty($name)) {
 				$output->writeln('Missing name for the template. Please try again.');
@@ -52,13 +52,13 @@ class MakeTemplateCommand extends Command {
 		$content = str_replace('{{ className }}', $nameSlugify, $content);
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/Templates/'. $nameSlugify. '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extend/Components/Templates/' . $nameSlugify . '.php', $content);
 
 		// Create a view file.
 		$view = FileSystem::get(__DIR__ . '/../Views/Templates/template.view');
 		$view = str_replace('{{ name }}', $name, $view);
 		$view = str_replace('{{ name_slugify }}', $nameSlugify, $view);
-		FileSystem::put($this->mainPath . '/resources/views/modules/web/templates/'. $name. '.php', $view);
+		FileSystem::put($this->mainPath . '/resources/views/modules/web/templates/' . $name . '.php', $view);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Templates/template.func');

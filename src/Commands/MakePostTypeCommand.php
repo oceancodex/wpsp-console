@@ -53,7 +53,7 @@ class MakePostTypeCommand extends Command {
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = str_replace('{{ name_slugify }}', $nameSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/PostTypes/'. $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extend/Components/PostTypes/' . $nameSlugify . '.php', $content);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/PostTypes/posttype.func');
