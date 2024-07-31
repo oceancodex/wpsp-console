@@ -36,8 +36,8 @@ class Kernel {
 			MakeListTableCommand::class,
 			MakeMetaBoxCommand::class,
 			MakeMiddlewareCommand::class,
-			MakeMigrationCommand::class,
-			MakeModelCommand::class,
+			class_exists('\WPSPCORE\Migration\Migration') ? MakeMigrationCommand::class : null,
+			class_exists('\WPSPCORE\Database\Eloquent') ? MakeModelCommand::class : null,
 			MakeNavLocationCommand::class,
 			MakeNavMenuCommand::class,
 			MakePostTypeCommand::class,
@@ -46,11 +46,11 @@ class Kernel {
 			MakeShortcodeCommand::class,
 			MakeTaxonomyCommand::class,
 			MakeTemplateCommand::class,
-			MigrationDiffCommand::class,
-			MigrationMigrateCommand::class,
+			class_exists('\WPSPCORE\Migration\Migration') ? MigrationDiffCommand::class : null,
+			class_exists('\WPSPCORE\Migration\Migration') ? MigrationMigrateCommand::class : null,
 		];
 		foreach ($commands as $command) {
-			$application->add(new $command(null, $mainPath, $rootNamespace, $prefixEnv));
+			if ($command) $application->add(new $command(null, $mainPath, $rootNamespace, $prefixEnv));
 		}
 	}
 
