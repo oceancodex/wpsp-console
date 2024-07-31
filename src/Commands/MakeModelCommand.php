@@ -18,14 +18,16 @@ class MakeModelCommand extends Command {
 	use CommandsTrait;
 
 	protected function configure(): void {
-		$this
-			->setName('make:model')
-			->setDescription('Create a new model.                       | Eg: bin/console make:model MyModel --table=custom_table --entity=MyEntity')
-			->setHelp('This command allows you to create a model.')
-			->addArgument('name', InputArgument::OPTIONAL, 'The class name of the model.')
-			->addOption('table', 'table', InputOption::VALUE_OPTIONAL, 'The table of the model.')
-			->addOption('entity', 'entity', InputOption::VALUE_OPTIONAL, 'The entity of the model.')
-			->addOption('mongodb', 'mongodb', InputOption::VALUE_NONE, 'This is MongoDB model or not?');
+		if (class_exists('\WPSPCORE\Database\Eloquent')) {
+			$this
+				->setName('make:model')
+				->setDescription('Create a new model.                       | Eg: bin/console make:model MyModel --table=custom_table --entity=MyEntity')
+				->setHelp('This command allows you to create a model.')
+				->addArgument('name', InputArgument::OPTIONAL, 'The class name of the model.')
+				->addOption('table', 'table', InputOption::VALUE_OPTIONAL, 'The table of the model.')
+				->addOption('entity', 'entity', InputOption::VALUE_OPTIONAL, 'The entity of the model.')
+				->addOption('mongodb', 'mongodb', InputOption::VALUE_NONE, 'This is MongoDB model or not?');
+		}
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
