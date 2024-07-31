@@ -47,8 +47,8 @@ class MakeSeederCommand extends Command {
 
 		// Append new seeder to DatabaseSeeder.
 		$databaseSeederContent = FileSystem::get($this->mainPath . '/database/seeders/DatabaseSeeder.php');
-		if (!preg_match('/\W'.$name.'::class/iu', $databaseSeederContent)) {
-			$databaseSeederContent = preg_replace('/->call\(\[([\S\s]*?)]\);/iu', "->call([$1	".$name."::class,\n		]);", $databaseSeederContent);
+		if (!preg_match('/\W' . $name . '::class/iu', $databaseSeederContent)) {
+			$databaseSeederContent = preg_replace('/->call\(\[([\S\s]*?)]\);/iu', "->call([$1	" . $name . "::class,\n		]);", $databaseSeederContent);
 			FileSystem::put($this->mainPath . '/database/seeders/DatabaseSeeder.php', $databaseSeederContent);
 		}
 

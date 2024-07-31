@@ -27,7 +27,7 @@ class MakeMetaBoxCommand extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$id        = $input->getArgument('id');
+		$id = $input->getArgument('id');
 
 		$helper = $this->getHelper('question');
 		if (!$id) {
@@ -40,9 +40,9 @@ class MakeMetaBoxCommand extends Command {
 			}
 
 			$createViewQuestion = new ConfirmationQuestion('Do you want to create view files for this meta box? [y/N]: ', false);
-			$createView = $helper->ask($input, $output, $createViewQuestion);
+			$createView         = $helper->ask($input, $output, $createViewQuestion);
 		}
-		$idSlugify = Str::slug($id, '_');
+		$idSlugify  = Str::slug($id, '_');
 		$createView = $createView ?? $input->getOption('create-view');
 
 		// Check exist.
@@ -58,7 +58,7 @@ class MakeMetaBoxCommand extends Command {
 			$view = FileSystem::get(__DIR__ . '/../Views/MetaBoxes/metabox.view');
 			$view = str_replace('{{ id }}', $id, $view);
 			$view = str_replace('{{ id_slugify }}', $idSlugify, $view);
-			FileSystem::put($this->mainPath . '/resources/views/modules/web/meta-boxes/'. $id. '.blade.php', $view);
+			FileSystem::put($this->mainPath . '/resources/views/modules/web/meta-boxes/' . $id . '.blade.php', $view);
 			$content = FileSystem::get(__DIR__ . '/../Stubs/MetaBoxes/metabox-view.stub');
 		}
 		else {

@@ -41,14 +41,14 @@ class MakeAdminPageCommand extends Command {
 			}
 
 			$createViewQuestion = new ConfirmationQuestion('Do you want to create view files for this admin page? [y/N]: ', false);
-			$createView = $helper->ask($input, $output, $createViewQuestion);
+			$createView         = $helper->ask($input, $output, $createViewQuestion);
 		}
 
 		// Define variables.
 		$pathSlugify = Str::slug($path);
-		$name = $path;
+		$name        = $path;
 		$nameSlugify = Str::slug($name, '_');
-		$createView = $createView ?? $input->getOption('create-view');
+		$createView  = $createView ?? $input->getOption('create-view');
 
 		// Check exist.
 		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/AdminPages/' . $nameSlugify . '.php');
