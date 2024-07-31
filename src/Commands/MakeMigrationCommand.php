@@ -24,7 +24,7 @@ class MakeMigrationCommand extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$name        = $input->getArgument('name');
+		$name   = $input->getArgument('name');
 		$helper = $this->getHelper('question');
 		if (!$name) {
 			$nameQuestion = new Question('Please enter the name of the migration: ');

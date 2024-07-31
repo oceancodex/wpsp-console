@@ -29,7 +29,7 @@ class MakeTaxonomyCommand extends Command {
 		$helper = $this->getHelper('question');
 		if (!$name) {
 			$nameQuestion = new Question('Please enter the name of the taxonomy: ');
-			$name = $helper->ask($input, $output, $nameQuestion);
+			$name         = $helper->ask($input, $output, $nameQuestion);
 
 			if (empty($name)) {
 				$output->writeln('Missing name for the taxonomy. Please try again.');
@@ -53,7 +53,7 @@ class MakeTaxonomyCommand extends Command {
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = str_replace('{{ name_slugify }}', $nameSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/Taxonomies/'. $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extend/Components/Taxonomies/' . $nameSlugify . '.php', $content);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Taxonomies/taxonomy.func');
