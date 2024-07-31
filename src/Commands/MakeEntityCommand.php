@@ -26,7 +26,7 @@ class MakeEntityCommand extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$name  = $input->getArgument('name');
+		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');
 		if (!$name) {

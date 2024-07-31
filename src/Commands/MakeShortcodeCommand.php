@@ -40,12 +40,12 @@ class MakeShortcodeCommand extends Command {
 			}
 
 			$createViewQuestion = new ConfirmationQuestion('Do you want to create view files for this shortcode? [y/N]: ', false);
-			$createView = $helper->ask($input, $output, $createViewQuestion);
+			$createView         = $helper->ask($input, $output, $createViewQuestion);
 		}
 
 		// Define variables.
 		$nameSlugify = Str::slug($name, '_');
-		$createView = $createView ?? $input->getOption('create-view');
+		$createView  = $createView ?? $input->getOption('create-view');
 
 		// Check exist.
 		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/Shortcodes/' . $nameSlugify . '.php');
@@ -59,7 +59,7 @@ class MakeShortcodeCommand extends Command {
 			$view = FileSystem::get(__DIR__ . '/../Views/Shortcodes/shortcode.view');
 			$view = str_replace('{{ name }}', $name, $view);
 			$view = str_replace('{{ name_slugify }}', $nameSlugify, $view);
-			FileSystem::put($this->mainPath . '/resources/views/modules/web/shortcodes/'. $name. '.blade.php', $view);
+			FileSystem::put($this->mainPath . '/resources/views/modules/web/shortcodes/' . $name . '.blade.php', $view);
 			$content = FileSystem::get(__DIR__ . '/../Stubs/Shortcodes/shortcode-view.stub');
 		}
 		else {
@@ -71,7 +71,7 @@ class MakeShortcodeCommand extends Command {
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = str_replace('{{ name_slugify }}', $nameSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/Shortcodes/'. $nameSlugify. '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extend/Components/Shortcodes/' . $nameSlugify . '.php', $content);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Shortcodes/shortcode.func');
