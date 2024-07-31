@@ -18,25 +18,23 @@ class MakeModelCommand extends Command {
 	use CommandsTrait;
 
 	protected function configure(): void {
-		if (class_exists('\WPSPCORE\Database\Eloquent')) {
-			$this
-				->setName('make:model')
-				->setDescription('Create a new model.                       | Eg: bin/console make:model MyModel --table=custom_table --entity=MyEntity')
-				->setHelp('This command allows you to create a model.')
-				->addArgument('name', InputArgument::OPTIONAL, 'The class name of the model.')
-				->addOption('table', 'table', InputOption::VALUE_OPTIONAL, 'The table of the model.')
-				->addOption('entity', 'entity', InputOption::VALUE_OPTIONAL, 'The entity of the model.')
-				->addOption('mongodb', 'mongodb', InputOption::VALUE_NONE, 'This is MongoDB model or not?');
-		}
+		$this
+			->setName('make:model')
+			->setDescription('Create a new model.                       | Eg: bin/console make:model MyModel --table=custom_table --entity=MyEntity')
+			->setHelp('This command allows you to create a model.')
+			->addArgument('name', InputArgument::OPTIONAL, 'The class name of the model.')
+			->addOption('table', 'table', InputOption::VALUE_OPTIONAL, 'The table of the model.')
+			->addOption('entity', 'entity', InputOption::VALUE_OPTIONAL, 'The entity of the model.')
+			->addOption('mongodb', 'mongodb', InputOption::VALUE_NONE, 'This is MongoDB model or not?');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$name   = $input->getArgument('name');
+		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');
 		if (!$name) {
 			$nameQuestion = new Question('Please enter the name of the model: ');
-			$name = $helper->ask($input, $output, $nameQuestion);
+			$name         = $helper->ask($input, $output, $nameQuestion);
 
 			if (empty($name)) {
 				$output->writeln('Missing name for the model. Please try again.');
@@ -44,7 +42,7 @@ class MakeModelCommand extends Command {
 			}
 
 			$tableQuestion = new Question('Please enter the table name of the model: ', 'my_model_table');
-			$table = $helper->ask($input, $output, $tableQuestion);
+			$table         = $helper->ask($input, $output, $tableQuestion);
 
 			$mongodbQuestion = new ConfirmationQuestion('This is MongoDB model? [y/N]: ', false);
 			$mongodb         = $helper->ask($input, $output, $mongodbQuestion);
@@ -69,8 +67,8 @@ class MakeModelCommand extends Command {
 			return Command::FAILURE;
 		}
 
-		$table  = $table ?? $input->getOption('table') ?: '';
-		$entity = $entity ?? $input->getOption('entity') ?: '';
+		$table   = $table ?? $input->getOption('table') ?: '';
+		$entity  = $entity ?? $input->getOption('entity') ?: '';
 		$mongodb = ($mongodb ?? $input->getOption('mongodb'));
 
 		// Create class file.
@@ -85,7 +83,7 @@ class MakeModelCommand extends Command {
 		$content = str_replace('{{ tablePrefix }}', $this->funcs->_getDBTablePrefix(false), $content);
 		$content = str_replace('{{ entity }}', $entity ?? null, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Models/'. $name . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Models/' . $name . '.php', $content);
 
 		// Create entity.
 		if ($entity) {
