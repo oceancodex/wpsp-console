@@ -58,7 +58,7 @@ class MakeRewriteFrontPageCommand extends Command {
 
 		// Check exist.
 		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/RewriteFrontPages/' . $nameSlugify . '.php');
-		$exist = $exist || FileSystem::exists($this->mainPath . '/resources/views/modules/web/rewrite-front-pages/' . $pathSlugify . '.php');
+		$exist = $exist || FileSystem::exists($this->mainPath . '/resources/views/modules/rewrite-front-pages/' . $pathSlugify . '.php');
 		if ($exist) {
 			$output->writeln('[ERROR] Rewrite front page: "' . $name . '" already exists! Please try again.');
 			return Command::FAILURE;
@@ -90,7 +90,7 @@ class MakeRewriteFrontPageCommand extends Command {
 		$view = str_replace('{{ path_slugify }}', $pathSlugify, $view);
 		$view = str_replace('{{ rewrite_page_slug }}', $rewritePageSlug, $view);
 		$view = str_replace('{{ rewrite_page_slug_slugify }}', $rewritePageSlugSlugify, $view);
-		FileSystem::put($this->mainPath . '/resources/views/modules/web/rewrite-front-pages/' . $path . '.blade.php', $view);
+		FileSystem::put($this->mainPath . '/resources/views/modules/rewrite-front-pages/' . $path . '.blade.php', $view);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/RewriteFrontPages/rewritefrontpage.func');

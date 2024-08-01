@@ -47,7 +47,7 @@ class MakeMetaBoxCommand extends Command {
 
 		// Check exist.
 		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/MetaBoxes/' . $idSlugify . '.php');
-//		$exist = $exist || FileSystem::exists(__DIR__ . '/../../../resources/views/modules/web/meta-boxes/'. $id . '.blade.php');
+//		$exist = $exist || FileSystem::exists(__DIR__ . '/../../../resources/views/modules/meta-boxes/'. $id . '.blade.php');
 		if ($exist) {
 			$output->writeln('[ERROR] Meta box: "' . $id . '" already exists! Please try again.');
 			return Command::FAILURE;
@@ -58,7 +58,7 @@ class MakeMetaBoxCommand extends Command {
 			$view = FileSystem::get(__DIR__ . '/../Views/MetaBoxes/metabox.view');
 			$view = str_replace('{{ id }}', $id, $view);
 			$view = str_replace('{{ id_slugify }}', $idSlugify, $view);
-			FileSystem::put($this->mainPath . '/resources/views/modules/web/meta-boxes/' . $id . '.blade.php', $view);
+			FileSystem::put($this->mainPath . '/resources/views/modules/meta-boxes/' . $id . '.blade.php', $view);
 			$content = FileSystem::get(__DIR__ . '/../Stubs/MetaBoxes/metabox-view.stub');
 		}
 		else {

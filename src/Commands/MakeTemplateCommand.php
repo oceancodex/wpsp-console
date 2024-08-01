@@ -58,7 +58,7 @@ class MakeTemplateCommand extends Command {
 		$view = FileSystem::get(__DIR__ . '/../Views/Templates/template.view');
 		$view = str_replace('{{ name }}', $name, $view);
 		$view = str_replace('{{ name_slugify }}', $nameSlugify, $view);
-		FileSystem::put($this->mainPath . '/resources/views/modules/web/templates/' . $name . '.php', $view);
+		FileSystem::put($this->mainPath . '/resources/views/modules/templates/' . $name . '.php', $view);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Templates/template.func');

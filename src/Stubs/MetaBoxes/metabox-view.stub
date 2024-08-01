@@ -30,7 +30,7 @@ class {{ className }} extends BaseMetaBox {
 
 	public function index($post, $meta_box): void {
 //		echo '<pre>'; print_r($meta_box); echo '</pre>';
-        echo Funcs::view('modules.web.meta-boxes.{{ id }}');
+        echo Funcs::view('modules.meta-boxes.{{ id }}');
 	}
 
 }
