@@ -9,6 +9,7 @@ use {{ rootNamespace }}\app\Extend\Instances\Cache\RateLimiter;
 use {{ rootNamespace }}\app\Models\SettingsModel;
 use {{ rootNamespace }}\app\Models\VideosModel;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
+use {{ rootNamespace }}\app\View\Share;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseAdminPage;
 
@@ -67,11 +68,19 @@ class {{ className }} extends BaseAdminPage {
 	public function beforeInit(): void {}
 
 	public function afterInit(): void {
+		// Custom highlight current menu.
+//		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
+//			add_filter('submenu_file', function($submenu_file) {
+//				return $this->menu_slug;
+//			});
+//		}
+
+		// Redirect to the "Database" tab if database version not valid.
 //		try {
 //			if ($this->currentPage == $this->menu_slug) {
 //				// Check database version and maybe redirect.
-//				$this->checkDatabase = Funcs::instance()->_getAppMigration()?->checkDatabaseVersion() ?? null;
-//				if (!empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
+//				$this->checkDatabase = Funcs::instance()->_getAppMigration()->checkDatabaseVersion();
+//				if (empty($this->checkDatabase['result']) && $this->currentPage == $this->getMenuSlug() && $this->currentTab !== 'database') {
 //					$url = Funcs::instance()->_buildUrl($this->getParentSlug(), [
 //						'page' => $this->getMenuSlug(),
 //						'tab'  => 'database',
@@ -102,13 +111,22 @@ class {{ className }} extends BaseAdminPage {
 	 */
 
 	public function index(): void {
-		try {
-			if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
-				Funcs::notice(Funcs::trans('Updated successfully', true), 'success');
-			}
+		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
+			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+		}
 
-//		    $requestParams = $this->request->query->all();
-//		    $menuSlug      = $this->getMenuSlug();
+		$requestParams = $this->request->query->all();
+		$menuSlug      = $this->getMenuSlug();
+
+		try {
+//		    $checkLicense  = License::checkLicense();
+
+			// Test cache.
+//			$cacheTest = Cache::get('cache-test', function(ItemInterface $item) {
+//				$item->expiresAfter(60);
+//				return 'This is a cached value';
+//			});
+//			echo '<pre style="z-index: 9999; position: relative; clear: both;">'; print_r($cacheTest); echo '</pre>';
 
 			$table = $this->table;
 
