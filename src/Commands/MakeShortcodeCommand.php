@@ -59,7 +59,7 @@ class MakeShortcodeCommand extends Command {
 			$view = FileSystem::get(__DIR__ . '/../Views/Shortcodes/shortcode.view');
 			$view = str_replace('{{ name }}', $name, $view);
 			$view = str_replace('{{ name_slugify }}', $nameSlugify, $view);
-			FileSystem::put($this->mainPath . '/resources/views/modules/web/shortcodes/' . $name . '.blade.php', $view);
+			FileSystem::put($this->mainPath . '/resources/views/modules/shortcodes/' . $name . '.blade.php', $view);
 			$content = FileSystem::get(__DIR__ . '/../Stubs/Shortcodes/shortcode-view.stub');
 		}
 		else {
