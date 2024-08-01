@@ -140,9 +140,7 @@ class {{ className }} extends BaseAdminPage {
 			]);
 		}
 		catch (\Exception|\Throwable $e) {
-			Funcs::notice($e->getMessage() . '.
-				<br/>Maybe you need run: <code>composer require oceancodex/wpsp-view</code> to use <b>View</b> module with template engine <b>Blade</b>.
-			', 'error', true, true);
+			Funcs::notice('Maybe you need run: <code>composer require oceancodex/wpsp-view</code> to use <b>View</b> module with template engine <b>Blade</b>.', 'error', true, true);
 
 			$user          = wp_get_current_user();
 			$settings      = Share::instance()->variables()['settings'] ?? null;
