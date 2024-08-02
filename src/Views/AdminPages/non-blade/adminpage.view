@@ -1,15 +1,15 @@
 <?php
 if (isset($requestParams['tab']) && $requestParams['tab'] == 'tab-1') {
-	$title = wpsp_trans('Tab 1', true);
-	$view  = wpsp_resources_path('/views/modules/admin-pages/{{ path }}/tab-1.php');
+	$title = $funcs->_trans('Tab 1', true);
+	$view  = $funcs->_getResourcesPath('/views/modules/admin-pages/{{ path }}/tab-1.php');
 }
 else {
-	$title = wpsp_trans('Dashboard', true);
-	$view  = wpsp_resources_path('/views/modules/admin-pages/{{ path }}/dashboard.php');
+	$title = $funcs->_trans('Dashboard', true);
+	$view  = $funcs->_getResourcesPath('/views/modules/admin-pages/{{ path }}/dashboard.php');
 }
-$navigation = wpsp_resources_path('/views/modules/admin-pages/{{ path }}/navigation.php');
+$navigation = $funcs->_getResourcesPath('/views/modules/admin-pages/{{ path }}/navigation.php');
 
-include wpsp_resources_path('/views/modules/admin-pages/header.php');
+include $funcs->_getResourcesPath('/views/modules/admin-pages/header.php');
 include $view;
-include wpsp_resources_path('/views/modules/admin-pages/footer.php');
+include $funcs->_getResourcesPath('/views/modules/admin-pages/footer.php');
 ?>
