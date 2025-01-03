@@ -18,7 +18,7 @@ class MakeNavLocationCommand extends Command {
 	protected function configure(): void {
 		$this
 			->setName('make:nav-location')
-			->setDescription('Create a new navigation menu location.    | Eg: bin/console make:nav-location custom_nav_location')
+			->setDescription('Create a new navigation menu location.    | Eg: bin/wpsp make:nav-location custom_nav_location')
 			->setHelp('This command allows you to create a navigation menu location.')
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the navigation menu location.');
 	}

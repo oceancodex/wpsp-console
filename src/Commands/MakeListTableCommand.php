@@ -17,7 +17,7 @@ class MakeListTableCommand extends Command {
 	protected function configure(): void {
 		$this
 			->setName('make:list-table')
-			->setDescription('Create a new list table.                  | Eg: bin/console make:list-table MyListTable')
+			->setDescription('Create a new list table.                  | Eg: bin/wpsp make:list-table MyListTable')
 			->setHelp('This command allows you to create a list table.')
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the list table.');
 	}
