@@ -20,13 +20,15 @@ class MakeAjaxCommand extends Command {
 	protected function configure(): void {
 		$this
 			->setName('make:ajax')
-			->setDescription('Create a new Ajax action.                 | Eg: bin/wpsp make:ajax my_action')
+			->setDescription('Create a new Ajax action.                 | Eg: bin/wpsp make:ajax GET my_action --nopriv')
 			->setHelp('This command allows you to create an Ajax action.')
+			->addArgument('method', InputArgument::OPTIONAL, 'The method of the Ajax.')
 			->addArgument('action', InputArgument::OPTIONAL, 'The action name of the Ajax.')
 			->addOption('nopriv', 'nopriv', InputOption::VALUE_NONE, 'Fires non-authenticated Ajax actions for logged-out users.');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
+		$method = $input->getArgument('method');
 		$action = $input->getArgument('action');
 
 		$helper = $this->getHelper('question');
@@ -44,25 +46,28 @@ class MakeAjaxCommand extends Command {
 		}
 
 		// Define variables.
+		$method        = strtolower($method);
 		$actionSlugify = Str::slug($action, '_');
 		$nopriv        = $nopriv ?? $input->getOption('nopriv') ?: 'false';
 		$nopriv        = $nopriv ? 'true' : 'false';
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Ajaxs/ajax.func');
+		$func = str_replace('{{ method }}', $method, $func);
 		$func = str_replace('{{ action }}', $action, $func);
 		$func = str_replace('{{ action_slugify }}', $actionSlugify, $func);
 		$func = str_replace('{{ nopriv }}', $nopriv, $func);
 
 		// Prepare new line for use class.
 		$use = FileSystem::get(__DIR__ . '/../Uses/Ajaxs/ajax.use');
+		$use = str_replace('{{ method }}', $method, $use);
 		$use = str_replace('{{ action }}', $action, $use);
 		$use = str_replace('{{ action_slugify }}', $actionSlugify, $use);
 		$use = str_replace('{{ nopriv }}', $nopriv, $use);
 		$use = $this->replaceNamespaces($use);
 
 		// Add class to route.
-		$this->addClassToRoute('Ajax', 'apis', $func, $use);
+		$this->addClassToRoute('Ajax', 'ajaxs', $func, $use);
 
 		// Output message.
 		$output->writeln('Created new Ajax action: "' . $action . '"');
