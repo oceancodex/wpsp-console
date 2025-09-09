@@ -48,8 +48,7 @@ class MakeAjaxCommand extends Command {
 		// Define variables.
 		$method        = strtolower($method);
 		$actionSlugify = Str::slug($action, '_');
-		$nopriv        = $nopriv ?? $input->getOption('nopriv') ?: 'false';
-		$nopriv        = $nopriv ? 'true' : 'false';
+		$nopriv        = $nopriv ?? $input->getOption('nopriv') ? 'true' : 'false';
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Ajaxs/ajax.func');
