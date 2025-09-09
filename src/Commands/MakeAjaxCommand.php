@@ -67,7 +67,7 @@ class MakeAjaxCommand extends Command {
 		$use = $this->replaceNamespaces($use);
 
 		// Add class to route.
-		$this->addClassToRoute('Ajax', 'ajaxs', $func, $use);
+		$this->addClassToRoute('Ajaxs', 'ajaxs', $func, $use);
 
 		// Output message.
 		$output->writeln('Created new Ajax action: "' . $action . '"');
