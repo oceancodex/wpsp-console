@@ -12,10 +12,11 @@ class {{ name_slugify }} extends BaseRewriteFrontPage {
 
 	use InstancesTrait;
 
-	public mixed $path                 = null;
-	public mixed $rewriteIdent         = '{{ path }}';
-	public mixed $useTemplate          = {{ use_template }};
-	public mixed $rewriteFrontPageSlug = '{{ rewrite_page_slug }}';      // You need create a "Page" with the slug like this.
+	public mixed $path                     = null;
+	public mixed $rewriteIdent             = '{{ path }}';
+	public mixed $useTemplate              = {{ use_template }};
+	public mixed $rewriteFrontPageSlug     = '{{ rewrite_page_slug }}';      // You need create a "Page" with the slug like this.
+	public mixed $rewriteFrontPagePostType = '{{ rewrite_page_post_type }}';
 
 	/**
 	 * Private properties.
