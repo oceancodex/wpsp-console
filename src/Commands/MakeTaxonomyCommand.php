@@ -18,7 +18,7 @@ class MakeTaxonomyCommand extends Command {
 	protected function configure(): void {
 		$this
 			->setName('make:taxonomy')
-			->setDescription('Create a new taxonomy.                    | Eg: bin/console make:taxonomy custom_taxonomy')
+			->setDescription('Create a new taxonomy.                    | Eg: bin/wpsp make:taxonomy custom_taxonomy')
 			->setHelp('This command allows you to create a taxonomy...')
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the taxonomy.');
 	}

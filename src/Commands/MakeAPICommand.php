@@ -19,7 +19,7 @@ class MakeAPICommand extends Command {
 	protected function configure(): void {
 		$this
 			->setName('make:api')
-			->setDescription('Create a new API end point.               | Eg: bin/console make:api my-api-endpoint')
+			->setDescription('Create a new API end point.               | Eg: bin/wpsp make:api my-api-endpoint')
 			->setHelp('This command allows you to create an API end point.')
 			->addArgument('path', InputArgument::OPTIONAL, 'The path of the API end point.')
 			->addOption('namespace', 'namespace', InputOption::VALUE_OPTIONAL, 'The namespace of the API end point.')
@@ -88,7 +88,7 @@ class MakeAPICommand extends Command {
 		$use = $this->replaceNamespaces($use);
 
 		// Add class to route.
-		$this->addClassToRoute('Api', 'apis', $func, $use);
+		$this->addClassToRoute('Apis', 'apis', $func, $use);
 
 		// Output message.
 		$output->writeln('Created new API end point: "' . $path . '"');
