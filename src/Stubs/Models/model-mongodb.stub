@@ -11,6 +11,7 @@ class {{ className }} extends Model {
 	use ModelsTrait, SoftDeletes, ObserversTrait;
 
 	protected $connection = 'mongodb';
+//	protected $prefix     = 'wp_{{ tablePrefix }}';
 	protected $table      = '{{ table }}';
 //	protected $primaryKey = 'id';
 
