@@ -88,7 +88,7 @@ class MakeAPICommand extends Command {
 		$use = $this->replaceNamespaces($use);
 
 		// Add class to route.
-		$this->addClassToRoute('Api', 'apis', $func, $use);
+		$this->addClassToRoute('Apis', 'apis', $func, $use);
 
 		// Output message.
 		$output->writeln('Created new API end point: "' . $path . '"');
