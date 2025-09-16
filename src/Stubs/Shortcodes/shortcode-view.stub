@@ -10,8 +10,23 @@ class {{ className }} extends BaseShortcode {
 
 	use InstancesTrait;
 
+//	public mixed $shortcode = null;
+
+	/*
+	 *
+	 */
+
 	public function index($atts, $content, $tag): string {
 		return Funcs::view('modules.shortcodes.{{ name }}')->render();
+	}
+
+
+	/*
+	 *
+	 */
+
+	public function customProperties(): void {
+//		$this->shortcode = 'custom_shortcode';
 	}
 
 }

@@ -13,7 +13,7 @@ class {{ className }} extends BaseTaxonomy {
 //	public mixed $object_type                = 'post';
 
 	// Labels.
-//	public mixed $name                       = '';
+//	public mixed $name                       = '{{ name }}';
 //	public mixed $singular_name              = '';
 //	public mixed $search_items               = '';
 //	public mixed $popular_items              = '';
@@ -91,4 +91,5 @@ class {{ className }} extends BaseTaxonomy {
 //		$this->args->labels['singular_name'] = 'Custom singular taxonomy';
 
 	}
+
 }

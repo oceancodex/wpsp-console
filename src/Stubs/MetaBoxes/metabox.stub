@@ -20,14 +20,6 @@ class {{ className }} extends BaseMetaBox {
 	 *
 	 */
 
-	public function init(string $post_type = null, \WP_Post $post = null): void {
-	    parent::init($post_type, $post);
-	}
-
-	/*
-	 *
-	 */
-
 	public function customProperties(): void {
 //		$this->title = 'Custom Meta Box "{{ id }}" Title Override';
 	}
@@ -37,7 +29,6 @@ class {{ className }} extends BaseMetaBox {
 	 */
 
 	public function index($post, $meta_box): void {
-//		echo '<pre>'; print_r($meta_box); echo '</pre>';
 		echo 'Custom Meta Box "{{ id }}" Content';
 	}
 
