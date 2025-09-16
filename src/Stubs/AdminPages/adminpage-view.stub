@@ -24,12 +24,13 @@ class {{ className }} extends BaseAdminPage {
 	public mixed  $icon_url                    = 'dashicons-admin-generic';
 //	public mixed  $position                    = 2;
 //	public mixed  $parent_slug                 = 'options-general.php';
-//	public mixed  $callback_index              = true;
 //	public mixed  $is_submenu_page             = false;
 //	public mixed  $remove_first_submenu        = false;
 //	public ?array $urls_highlight_current_menu = null;
+//	public mixed  $custom_properties           = null;
+//	public mixed  $callback_function           = null;
 
-	private mixed $checkDatabase               = null;
+//	private mixed $checkDatabase               = null;
 	private mixed $table                       = null;
 	private mixed $currentTab                  = null;
 	private mixed $currentPage                 = null;
@@ -121,8 +122,8 @@ class {{ className }} extends BaseAdminPage {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
 		}
 
-		$requestParams = $this->request->query->all();
-		$menuSlug      = $this->getMenuSlug();
+//		$requestParams = $this->request->query->all();
+//		$menuSlug      = $this->getMenuSlug();
 
 		try {
 //		    $checkLicense  = License::checkLicense();
@@ -137,22 +138,16 @@ class {{ className }} extends BaseAdminPage {
 			$table = $this->table;
 
 			echo Funcs::view('modules.admin-pages.{{ path }}.main', compact(
-				'requestParams',
-				'menuSlug',
+//				'requestParams',
+//				'menuSlug',
 //			    'checkLicense',
 				'table'
 			))->with([
-				'checkDatabase' => $this->checkDatabase,
+//				'checkDatabase' => $this->checkDatabase,
 			]);
 		}
 		catch (\Exception|\Throwable $e) {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
-
-			$user          = wp_get_current_user();
-			$settings      = Share::instance()->variables()['settings'] ?? null;
-			$checkDatabase = $this->checkDatabase;
-			$funcs         = Funcs::instance();
-
 			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/{{ path }}/main.php'));
 		}
 	}

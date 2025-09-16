@@ -6,7 +6,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use WPSPCORE\Traits\CommandsTrait;
+use WPSPCORE\Console\Traits\CommandsTrait;
 
 class MigrationMigrateCommand extends Command {
 
