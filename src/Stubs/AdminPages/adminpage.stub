@@ -1,11 +1,11 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\AdminPages;
+namespace {{ rootNamespace }}\app\Extends\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
-use {{ rootNamespace }}\app\Extend\Components\License\License;
-use {{ rootNamespace }}\app\Extend\Instances\Cache\Cache;
-use {{ rootNamespace }}\app\Extend\Instances\Cache\RateLimiter;
+use {{ rootNamespace }}\app\Extends\Components\License\License;
+use {{ rootNamespace }}\app\Extends\Instances\Cache\Cache;
+use {{ rootNamespace }}\app\Extends\Instances\Cache\RateLimiter;
 use {{ rootNamespace }}\app\Models\SettingsModel;
 use {{ rootNamespace }}\app\Models\VideosModel;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
@@ -103,7 +103,7 @@ class {{ className }} extends BaseAdminPage {
 
 	public function afterLoad($adminPage): void {
 //		if ($this->request->get('tab') == 'table') {
-//			$this->table = new \{{ rootNamespace }}\app\Extend\Components\ListTables\Settings();
+//			$this->table = new \{{ rootNamespace }}\app\Extends\Components\ListTables\Settings();
 //		}
 	}
 

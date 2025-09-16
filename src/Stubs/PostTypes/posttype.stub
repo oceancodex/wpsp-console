@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\PostTypes;
+namespace {{ rootNamespace }}\app\Extends\Components\PostTypes;
 
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BasePostType;

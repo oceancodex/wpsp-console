@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\RewriteFrontPages;
+namespace {{ rootNamespace }}\app\Extends\Components\RewriteFrontPages;
 
 use {{ rootNamespace }}\Funcs;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;

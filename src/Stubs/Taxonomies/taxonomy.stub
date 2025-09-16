@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\Taxonomies;
+namespace {{ rootNamespace }}\app\Extends\Components\Taxonomies;
 
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BaseTaxonomy;

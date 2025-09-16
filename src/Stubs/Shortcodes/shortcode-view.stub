@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\Shortcodes;
+namespace {{ rootNamespace }}\app\Extends\Components\Shortcodes;
 
 use {{ rootNamespace }}\Funcs;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;

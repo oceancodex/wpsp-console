@@ -1,9 +1,9 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\ListTables;
+namespace {{ rootNamespace }}\app\Extends\Components\ListTables;
 
 use Symfony\Contracts\Cache\ItemInterface;
-use {{ rootNamespace }}\app\Extend\Instances\Cache\Cache;
+use {{ rootNamespace }}\app\Extends\Instances\Cache\Cache;
 use {{ rootNamespace }}\app\Models\PostsModel;
 use {{ rootNamespace }}\app\Models\SettingsModel;
 use {{ rootNamespace }}\Funcs;
