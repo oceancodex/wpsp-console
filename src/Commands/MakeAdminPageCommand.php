@@ -20,7 +20,7 @@ class MakeAdminPageCommand extends Command {
 	protected function configure(): void {
 		$this
 			->setName('make:admin-page')
-			->setDescription('Create a new admin page.                  | Eg: bin/wpsp make:admin-page custom-admin-page')
+			->setDescription('Create a new admin page.                  | Eg: bin/wpsp make:admin-page custom-admin-page --create-view')
 			->setHelp('This command allows you to create an admin page.')
 			->addArgument('path', InputArgument::OPTIONAL, 'The path of the admin page.')
 			->addOption('create-view', 'create-view', InputOption::VALUE_NONE, 'Create view files for this admin page or not?');
