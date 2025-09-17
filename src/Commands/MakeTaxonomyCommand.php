@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use WPSPCORE\Traits\CommandsTrait;
+use WPSPCORE\Console\Traits\CommandsTrait;
 
 class MakeTaxonomyCommand extends Command {
 
@@ -41,7 +41,7 @@ class MakeTaxonomyCommand extends Command {
 		$nameSlugify = Str::slug($name, '_');
 
 		// Check exist.
-		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/Taxonomies/' . $nameSlugify . '.php');
+		$exist = FileSystem::exists($this->mainPath . '/app/Extras/Components/Taxonomies/' . $nameSlugify . '.php');
 		if ($exist) {
 			$output->writeln('[ERROR] Taxonomy: "' . $name . '" already exists! Please try again.');
 			return Command::FAILURE;
@@ -53,7 +53,7 @@ class MakeTaxonomyCommand extends Command {
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = str_replace('{{ name_slugify }}', $nameSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/Taxonomies/' . $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extras/Components/Taxonomies/' . $nameSlugify . '.php', $content);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Taxonomies/taxonomy.func');

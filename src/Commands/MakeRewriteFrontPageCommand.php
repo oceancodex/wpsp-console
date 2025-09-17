@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use WPSPCORE\Traits\CommandsTrait;
+use WPSPCORE\Console\Traits\CommandsTrait;
 
 class MakeRewriteFrontPageCommand extends Command {
 
@@ -62,7 +62,7 @@ class MakeRewriteFrontPageCommand extends Command {
 		$useTemplate            = $useTemplate ?? $input->getOption('use-template') ?: false;
 
 		// Check exist.
-		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/RewriteFrontPages/' . $nameSlugify . '.php');
+		$exist = FileSystem::exists($this->mainPath . '/app/Extras/Components/RewriteFrontPages/' . $nameSlugify . '.php');
 		$exist = $exist || FileSystem::exists($this->mainPath . '/resources/views/modules/rewrite-front-pages/' . $pathSlugify . '.php');
 		if ($exist) {
 			$output->writeln('[ERROR] Rewrite front page: "' . $name . '" already exists! Please try again.');
@@ -81,7 +81,7 @@ class MakeRewriteFrontPageCommand extends Command {
 		$content = str_replace('{{ rewrite_page_slug_slugify }}', $rewritePageSlugSlugify, $content);
 		$content = str_replace('{{ use_template }}', $useTemplate ? 'true' : 'false', $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/RewriteFrontPages/' . $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extras/Components/RewriteFrontPages/' . $nameSlugify . '.php', $content);
 
 		// Create view file.
 		if ($useTemplate) {

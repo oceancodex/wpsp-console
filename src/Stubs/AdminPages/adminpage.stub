@@ -1,11 +1,11 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\AdminPages;
+namespace {{ rootNamespace }}\app\Extras\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
-use {{ rootNamespace }}\app\Extend\Components\License\License;
-use {{ rootNamespace }}\app\Extend\Instances\Cache\Cache;
-use {{ rootNamespace }}\app\Extend\Instances\Cache\RateLimiter;
+use {{ rootNamespace }}\app\Extras\Components\License\License;
+use {{ rootNamespace }}\app\Extras\Instances\Cache\Cache;
+use {{ rootNamespace }}\app\Extras\Instances\Cache\RateLimiter;
 use {{ rootNamespace }}\app\Models\SettingsModel;
 use {{ rootNamespace }}\app\Models\VideosModel;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
@@ -24,10 +24,11 @@ class {{ className }} extends BaseAdminPage {
 	public mixed  $icon_url                    = 'dashicons-admin-generic';
 //	public mixed  $position                    = 2;
 //	public mixed  $parent_slug                 = 'options-general.php';
-//	public mixed  $callback_index              = true;
 //	public mixed  $is_submenu_page             = false;
 //	public mixed  $remove_first_submenu        = false;
 //	public ?array $urls_highlight_current_menu = null;
+//	public mixed  $custom_properties           = null;
+//	public mixed  $callback_function           = null;
 
 //	private mixed $checkDatabase               = null;
 	private mixed $table                       = null;
@@ -102,7 +103,7 @@ class {{ className }} extends BaseAdminPage {
 
 	public function afterLoad($adminPage): void {
 //		if ($this->request->get('tab') == 'table') {
-//			$this->table = new \{{ rootNamespace }}\app\Extend\Components\ListTables\Settings();
+//			$this->table = new \{{ rootNamespace }}\app\Extras\Components\ListTables\Settings();
 //		}
 	}
 
