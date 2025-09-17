@@ -20,7 +20,7 @@ class MakeScheduleCommand extends Command {
 	protected function configure(): void {
 		$this
 			->setName('make:schedule')
-			->setDescription('Create a new schedule.                   | Eg: bin/wpsp make:schedule custom_schedule_hook hourly')
+			->setDescription('Create a new schedule.                    | Eg: bin/wpsp make:schedule custom_schedule_hook hourly')
 			->setHelp('This command allows you to create a schedule.')
 			->addArgument('hook', InputArgument::OPTIONAL, 'The hook of the schedule.')
 			->addArgument('interval', InputArgument::OPTIONAL, 'The interval of the schedule.');
