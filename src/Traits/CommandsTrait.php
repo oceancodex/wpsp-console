@@ -8,11 +8,11 @@ use WPSPCORE\Funcs;
 
 trait CommandsTrait {
 
-	public $mainPath      = null;
-	public $rootNamespace = null;
-	public $prefixEnv     = null;
-	public $funcs         = null;
-	public $coreNamespace = 'WPSPCORE';
+	public        $mainPath      = null;
+	public        $rootNamespace = null;
+	public        $prefixEnv     = null;
+	public ?Funcs $funcs         = null;
+	public string $coreNamespace = 'WPSPCORE';
 
 	public function __construct($name = null, $mainPath = null, $rootNamespace = null, $prefixEnv = null) {
 		parent::__construct($name);
@@ -38,7 +38,7 @@ trait CommandsTrait {
 	 *
 	 */
 
-	public function getRouteContent($routeName) {
+	public function getRouteContent($routeName): ?string {
 		return FileSystem::get($this->mainPath . '/routes/'.$routeName.'.php');
 	}
 
