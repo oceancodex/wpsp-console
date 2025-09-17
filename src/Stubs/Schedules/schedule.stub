@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ rootNamespace }}\app\Extends\Components\Schedules;
+
+use {{ rootNamespace }}\Funcs;
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
+use {{ coreNamespace }}\Base\BaseSchedule;
+
+class {{ className }} extends BaseSchedule {
+
+	use InstancesTrait;
+
+	public function run(): void {
+        // Code here.
+	}
+
+}
