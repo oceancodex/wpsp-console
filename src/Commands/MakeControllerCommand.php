@@ -14,7 +14,7 @@ class MakeControllerCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:controller')
 			->setDescription('Create a new controller.                  | Eg: bin/wpsp make:controller MyController')

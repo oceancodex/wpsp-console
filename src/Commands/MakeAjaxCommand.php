@@ -17,7 +17,7 @@ class MakeAjaxCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:ajax')
 			->setDescription('Create a new Ajax action.                 | Eg: bin/wpsp make:ajax GET my_action --nopriv')

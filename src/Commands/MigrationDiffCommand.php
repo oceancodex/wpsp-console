@@ -11,14 +11,14 @@ class MigrationDiffCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('migration:diff')
 			->setDescription('Migration diff.')
 			->setHelp('This command allows you to run migration diff.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 
 		$tablePrefix = $this->funcs->_getDBTablePrefix();
 

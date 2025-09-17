@@ -17,7 +17,7 @@ class MakeAdminPageCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:admin-page')
 			->setDescription('Create a new admin page.                  | Eg: bin/wpsp make:admin-page custom-admin-page --create-view')

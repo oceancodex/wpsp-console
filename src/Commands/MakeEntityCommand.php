@@ -15,7 +15,7 @@ class MakeEntityCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:entity')
 			->setDescription('Create a new entity.                      | Eg: bin/wpsp make:entity MyEntity --table=custom_table --model=MyModel')
