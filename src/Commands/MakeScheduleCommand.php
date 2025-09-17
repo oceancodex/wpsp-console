@@ -52,7 +52,7 @@ class MakeScheduleCommand extends Command {
 		$intervalSlugify = Str::slug($interval, '_');
 
 		// Check exist.
-		$exist = FileSystem::exists($this->mainPath . '/app/Extends/Components/Schedules/' . $hookSlugify . '.php');
+		$exist = FileSystem::exists($this->mainPath . '/app/Extras/Components/Schedules/' . $hookSlugify . '.php');
 		if ($exist) {
 			$output->writeln('[ERROR] Shortcode: "' . $hookSlugify . '" already exists! Please try again.');
 			return Command::FAILURE;
@@ -67,7 +67,7 @@ class MakeScheduleCommand extends Command {
 		$content = str_replace('{{ interval }}', $interval, $content);
 		$content = str_replace('{{ interval_slugify }}', $intervalSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extends/Components/Schedules/' . $hookSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extras/Components/Schedules/' . $hookSlugify . '.php', $content);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Schedules/schedule.func');

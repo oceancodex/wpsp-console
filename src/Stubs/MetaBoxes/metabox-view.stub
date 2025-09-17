@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extends\Components\MetaBoxes;
+namespace {{ rootNamespace }}\app\Extras\Components\MetaBoxes;
 
 use {{ rootNamespace }}\Funcs;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;

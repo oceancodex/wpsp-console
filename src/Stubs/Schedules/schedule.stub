@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extends\Components\Schedules;
+namespace {{ rootNamespace }}\app\Extras\Components\Schedules;
 
 use {{ rootNamespace }}\Funcs;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;

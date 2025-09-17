@@ -51,7 +51,7 @@ class MakeAdminPageCommand extends Command {
 		$createView  = $createView ?? $input->getOption('create-view');
 
 		// Check exist.
-		$exist = FileSystem::exists($this->mainPath . '/app/Extends/Components/AdminPages/' . $nameSlugify . '.php');
+		$exist = FileSystem::exists($this->mainPath . '/app/Extras/Components/AdminPages/' . $nameSlugify . '.php');
 		$exist = $exist || FileSystem::exists($this->mainPath . '/resources/views/modules/admin-pages/' . $path);
 		if ($exist) {
 			$output->writeln('[ERROR] Admin page: "' . $path . '" already exists! Please try again.');
@@ -71,7 +71,7 @@ class MakeAdminPageCommand extends Command {
 		$content = str_replace('{{ path }}', $path, $content);
 		$content = str_replace('{{ path_slugify }}', $pathSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extends/Components/AdminPages/' . $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extras/Components/AdminPages/' . $nameSlugify . '.php', $content);
 
 		if ($createView) {
 

@@ -41,7 +41,7 @@ class MakePostTypeCommand extends Command {
 		$nameSlugify = Str::slug($name, '_');
 
 		// Check exist.
-		$exist = FileSystem::exists($this->mainPath . '/app/Extends/Components/PostTypes/' . $nameSlugify . '.php');
+		$exist = FileSystem::exists($this->mainPath . '/app/Extras/Components/PostTypes/' . $nameSlugify . '.php');
 		if ($exist) {
 			$output->writeln('[ERROR] Post type: "' . $name . '" already exists! Please try again.');
 			return Command::FAILURE;
@@ -53,7 +53,7 @@ class MakePostTypeCommand extends Command {
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = str_replace('{{ name_slugify }}', $nameSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extends/Components/PostTypes/' . $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extras/Components/PostTypes/' . $nameSlugify . '.php', $content);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/PostTypes/posttype.func');
