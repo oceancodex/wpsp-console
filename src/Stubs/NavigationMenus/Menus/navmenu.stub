@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\NavigationMenus\Menus;
+namespace {{ rootNamespace }}\app\Extras\Components\NavigationMenus\Menus;
 
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BaseNavigationMenu;
@@ -33,7 +33,7 @@ class {{ className }} extends BaseNavigationMenu {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->args->menu        = 'menu-1';
 		$this->args->fallback_cb = $this->fallback();
 	}

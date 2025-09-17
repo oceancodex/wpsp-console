@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\Shortcodes;
+namespace {{ rootNamespace }}\app\Extras\Components\Shortcodes;
 
 use {{ rootNamespace }}\Funcs;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
@@ -10,8 +10,23 @@ class {{ className }} extends BaseShortcode {
 
 	use InstancesTrait;
 
-	public function index($atts, $content, $tag): string {
+//	public $shortcode = null;
+
+	/*
+	 *
+	 */
+
+	public function index($atts, $content, $tag) {
 		return do_shortcode($content);
+	}
+
+
+	/*
+	 *
+	 */
+
+	public function customProperties() {
+//		$this->shortcode = 'custom_shortcode';
 	}
 
 }

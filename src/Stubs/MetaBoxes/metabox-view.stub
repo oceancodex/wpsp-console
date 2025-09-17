@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\MetaBoxes;
+namespace {{ rootNamespace }}\app\Extras\Components\MetaBoxes;
 
 use {{ rootNamespace }}\Funcs;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
@@ -20,7 +20,7 @@ class {{ className }} extends BaseMetaBox {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->title = 'Custom Meta Box "{{ id }}" Title Override';
 	}
 
@@ -28,8 +28,7 @@ class {{ className }} extends BaseMetaBox {
 	 *
 	 */
 
-	public function index($post, $meta_box): void {
-//		echo '<pre>'; print_r($meta_box); echo '</pre>';
+	public function index($post, $meta_box) {
         echo Funcs::view('modules.meta-boxes.{{ id }}');
 	}
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\Templates;
+namespace {{ rootNamespace }}\app\Extras\Components\Templates;
 
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\Funcs;
@@ -13,7 +13,7 @@ class {{ className }} extends BaseTemplates {
 	public $label = '[WPSP] Template: {{ name }}';
 //	public $path  = null;
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->path = Funcs::instance()->_getResourcesPath('/views/modules/templates/' . $this->name . '.blade.php');
 	}
 

@@ -13,7 +13,7 @@ class {{ className }} extends BaseSeeder {
 
 	use WithoutModelEvents, InstancesTrait;
 
-	public function run(): void {
+	public function run() {
 //		$faker = Faker::create('vi_VN');
 //		$faker = Funcs::faker();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\Taxonomies;
+namespace {{ rootNamespace }}\app\Extras\Components\Taxonomies;
 
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BaseTaxonomy;
@@ -13,7 +13,7 @@ class {{ className }} extends BaseTaxonomy {
 //	public $object_type                = 'post';
 
 	// Labels.
-//	public $name                       = '';
+//	public $name                       = '{{ name }}';
 //	public $singular_name              = '';
 //	public $search_items               = '';
 //	public $popular_items              = '';
@@ -91,4 +91,5 @@ class {{ className }} extends BaseTaxonomy {
 //		$this->args->labels['singular_name'] = 'Custom singular taxonomy';
 
 	}
+
 }

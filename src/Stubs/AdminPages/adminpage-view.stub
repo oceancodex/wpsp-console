@@ -1,11 +1,11 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\AdminPages;
+namespace {{ rootNamespace }}\app\Extras\Components\AdminPages;
 
 use Symfony\Contracts\Cache\ItemInterface;
-use {{ rootNamespace }}\app\Extend\Components\License\License;
-use {{ rootNamespace }}\app\Extend\Instances\Cache\Cache;
-use {{ rootNamespace }}\app\Extend\Instances\Cache\RateLimiter;
+use {{ rootNamespace }}\app\Extras\Components\License\License;
+use {{ rootNamespace }}\app\Extras\Instances\Cache\Cache;
+use {{ rootNamespace }}\app\Extras\Instances\Cache\RateLimiter;
 use {{ rootNamespace }}\app\Models\SettingsModel;
 use {{ rootNamespace }}\app\Models\VideosModel;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
@@ -24,10 +24,11 @@ class {{ className }} extends BaseAdminPage {
 	public  $icon_url                    = 'dashicons-admin-generic';
 //	public  $position                    = 2;
 //	public  $parent_slug                 = 'options-general.php';
-//	public  $callback_index              = true;
 //	public  $is_submenu_page             = false;
 //	public  $remove_first_submenu        = false;
 //	public  $urls_highlight_current_menu = null;
+//	public  $custom_properties           = null;
+//	public  $callback_function           = null;
 
 //	private $checkDatabase               = null;
 	private $table                       = null;
@@ -38,7 +39,7 @@ class {{ className }} extends BaseAdminPage {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->menu_title                  = '';
 //		$this->page_title                  = '';
 //		$this->capability                  = '';
@@ -66,14 +67,14 @@ class {{ className }} extends BaseAdminPage {
 	 *
 	 */
 
-//	public function init($path = null): void {
+//	public function init($path = null) {
 //		// You must call to parent method "init" if you want to custom it.
 //		parent::init();
 //	}
 
-	public function beforeInit(): void {}
+	public function beforeInit() {}
 
-	public function afterInit(): void {
+	public function afterInit() {
 		// Custom highlight current menu.
 //		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
@@ -100,13 +101,13 @@ class {{ className }} extends BaseAdminPage {
 //		}
 	}
 
-	public function afterLoad($adminPage): void {
+	public function afterLoad($adminPage) {
 //		if ($this->request->get('tab') == 'table') {
-//			$this->table = new \{{ rootNamespace }}\app\Extend\Components\ListTables\Settings();
+//			$this->table = new \{{ rootNamespace }}\app\Extras\Components\ListTables\Settings();
 //		}
 	}
 
-//	public function screenOptions($adminPage): void {
+//	public function screenOptions($adminPage) {
 //		if ($this->request->get('tab') == 'table') {
 //			parent::screenOptions($adminPage);
 //		}
@@ -116,7 +117,7 @@ class {{ className }} extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
 		}
@@ -142,22 +143,16 @@ class {{ className }} extends BaseAdminPage {
 //			    'checkLicense',
 				'table'
 			))->with([
-				'checkDatabase' => $this->checkDatabase,
+//				'checkDatabase' => $this->checkDatabase,
 			]);
 		}
 		catch (\Exception|\Throwable $e) {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
-
-			$user          = wp_get_current_user();
-			$settings      = Share::instance()->variables()['settings'] ?? null;
-			$checkDatabase = $this->checkDatabase;
-			$funcs         = Funcs::instance();
-
 			include(Funcs::instance()->_getResourcesPath('/views/modules/admin-pages/{{ path }}/main.php'));
 		}
 	}
 
-	public function update(): void {
+	public function update() {
 //		try {
 //			$tab = $this->request->get('tab');
 //			if ($tab !== 'table') {
@@ -195,7 +190,7 @@ class {{ className }} extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles(): void {
+	public function styles() {
 //		wp_enqueue_style(
 //			Funcs::config('app.short_name') . '-admin',
 //			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
@@ -204,7 +199,7 @@ class {{ className }} extends BaseAdminPage {
 //		);
 	}
 
-	public function scripts(): void {
+	public function scripts() {
 //		wp_enqueue_script(
 //			Funcs::config('app.short_name') . '-database',
 //			Funcs::instance()->_getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js',
@@ -214,7 +209,7 @@ class {{ className }} extends BaseAdminPage {
 //		);
 	}
 
-	public function localizeScripts(): void {
+	public function localizeScripts() {
 //		wp_localize_script(
 //			Funcs::config('app.short_name') . '-database',
 //			Funcs::config('app.short_name') . '_localize',

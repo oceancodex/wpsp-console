@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\PostTypes;
+namespace {{ rootNamespace }}\app\Extras\Components\PostTypes;
 
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BasePostType;
@@ -20,8 +20,8 @@ class {{ className }} extends BasePostType {
 //	public $post_type                       = '{{ name }}'; // Override the post type.
 
 	/** Labels. */
-//	public $name                            = '';
-//	public $singular_name                   = '';
+//	public $name                            = null;
+//	public $singular_name                   = '{{ name }}';
 //	public $add_new                         = '';
 //	public $add_new_item                    = '';
 //	public $edit_item                       = '';
@@ -97,7 +97,7 @@ class {{ className }} extends BasePostType {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 
 		/**
 		 * Modify "post_type" and "args" properties.

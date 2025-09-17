@@ -16,7 +16,7 @@ class {{ className }} extends BaseMiddleware {
 	 *
 	 * @return bool
 	 */
-    public function handle($request): bool {
+    public function handle($request) {
         return true;
     }
 

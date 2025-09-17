@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use WPSPCORE\Traits\CommandsTrait;
+use WPSPCORE\Console\Traits\CommandsTrait;
 
 class MakeAdminPageCommand extends Command {
 
@@ -20,13 +20,13 @@ class MakeAdminPageCommand extends Command {
 	protected function configure(): void {
 		$this
 			->setName('make:admin-page')
-			->setDescription('Create a new admin page.                  | Eg: bin/wpsp make:admin-page custom-admin-page')
+			->setDescription('Create a new admin page.                  | Eg: bin/wpsp make:admin-page custom-admin-page --create-view')
 			->setHelp('This command allows you to create an admin page.')
 			->addArgument('path', InputArgument::OPTIONAL, 'The path of the admin page.')
 			->addOption('create-view', 'create-view', InputOption::VALUE_NONE, 'Create view files for this admin page or not?');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$path = $input->getArgument('path');
 
 		// If path is empty.
@@ -51,7 +51,7 @@ class MakeAdminPageCommand extends Command {
 		$createView  = $createView ?? $input->getOption('create-view');
 
 		// Check exist.
-		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/AdminPages/' . $nameSlugify . '.php');
+		$exist = FileSystem::exists($this->mainPath . '/app/Extras/Components/AdminPages/' . $nameSlugify . '.php');
 		$exist = $exist || FileSystem::exists($this->mainPath . '/resources/views/modules/admin-pages/' . $path);
 		if ($exist) {
 			$output->writeln('[ERROR] Admin page: "' . $path . '" already exists! Please try again.');
@@ -71,7 +71,7 @@ class MakeAdminPageCommand extends Command {
 		$content = str_replace('{{ path }}', $path, $content);
 		$content = str_replace('{{ path_slugify }}', $pathSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/AdminPages/' . $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extras/Components/AdminPages/' . $nameSlugify . '.php', $content);
 
 		if ($createView) {
 
