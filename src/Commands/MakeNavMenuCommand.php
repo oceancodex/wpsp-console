@@ -43,7 +43,7 @@ class MakeNavMenuCommand extends Command {
 		$content = FileSystem::get(__DIR__ . '/../Stubs/NavigationMenus/Menus/navmenu.stub');
 		$content = str_replace('{{ className }}', $name, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/NavigationMenus/Menus/' . $name . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extends/Components/NavigationMenus/Menus/' . $name . '.php', $content);
 
 		// Output message.
 		$output->writeln('Created new navigation menu location: "' . $name . '"');

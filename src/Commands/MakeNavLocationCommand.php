@@ -46,7 +46,7 @@ class MakeNavLocationCommand extends Command {
 		$content = str_replace('{{ className }}', $nameSlugify, $content);
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/NavigationMenus/Locations/' . $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extends/Components/NavigationMenus/Locations/' . $nameSlugify . '.php', $content);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/NavigationMenus/Locations/navlocation.func');

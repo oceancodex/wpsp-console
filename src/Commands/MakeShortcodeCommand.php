@@ -48,7 +48,7 @@ class MakeShortcodeCommand extends Command {
 		$createView  = $createView ?? $input->getOption('create-view');
 
 		// Check exist.
-		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/Shortcodes/' . $nameSlugify . '.php');
+		$exist = FileSystem::exists($this->mainPath . '/app/Extends/Components/Shortcodes/' . $nameSlugify . '.php');
 		if ($exist) {
 			$output->writeln('[ERROR] Shortcode: "' . $name . '" already exists! Please try again.');
 			return Command::FAILURE;
@@ -71,7 +71,7 @@ class MakeShortcodeCommand extends Command {
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = str_replace('{{ name_slugify }}', $nameSlugify, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/Shortcodes/' . $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extends/Components/Shortcodes/' . $nameSlugify . '.php', $content);
 
 		// Prepare new line for find function.
 		$func = FileSystem::get(__DIR__ . '/../Funcs/Shortcodes/shortcode.func');

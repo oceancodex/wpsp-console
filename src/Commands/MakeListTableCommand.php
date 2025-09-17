@@ -40,7 +40,7 @@ class MakeListTableCommand extends Command {
 		$content = FileSystem::get(__DIR__ . '/../Stubs/ListTables/listtable.stub');
 		$content = str_replace('{{ className }}', $name, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/ListTables/' . $name . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extends/Components/ListTables/' . $name . '.php', $content);
 
 		// Output message.
 		$output->writeln('Created new list table: "' . $name . '"');
