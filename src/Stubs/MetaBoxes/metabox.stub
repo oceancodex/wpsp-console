@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\MetaBoxes;
+namespace {{ rootNamespace }}\app\Extras\Components\MetaBoxes;
 
 use {{ rootNamespace }}\Funcs;
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
@@ -29,7 +29,6 @@ class {{ className }} extends BaseMetaBox {
 	 */
 
 	public function index($post, $meta_box): void {
-//		echo '<pre>'; print_r($meta_box); echo '</pre>';
 		echo 'Custom Meta Box "{{ id }}" Content';
 	}
 

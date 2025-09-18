@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\NavigationMenus\Locations;
+namespace {{ rootNamespace }}\app\Extras\Components\NavigationMenus\Locations;
 
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BaseNavigationLocation;
