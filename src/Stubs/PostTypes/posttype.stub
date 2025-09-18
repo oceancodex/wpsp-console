@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ rootNamespace }}\app\Extend\Components\PostTypes;
+namespace {{ rootNamespace }}\app\Extras\Components\PostTypes;
 
 use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BasePostType;
@@ -20,8 +20,8 @@ class {{ className }} extends BasePostType {
 //	public mixed $post_type                       = '{{ name }}'; // Override the post type.
 
 	/** Labels. */
-//	public mixed $name                            = '';
-//	public mixed $singular_name                   = '';
+//	public mixed $name                            = null;
+//	public mixed $singular_name                   = '{{ name }}';
 //	public mixed $add_new                         = '';
 //	public mixed $add_new_item                    = '';
 //	public mixed $edit_item                       = '';

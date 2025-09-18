@@ -17,6 +17,7 @@ use WPSPCORE\Console\Commands\MakeNavLocationCommand;
 use WPSPCORE\Console\Commands\MakeNavMenuCommand;
 use WPSPCORE\Console\Commands\MakePostTypeCommand;
 use WPSPCORE\Console\Commands\MakeRewriteFrontPageCommand;
+use WPSPCORE\Console\Commands\MakeScheduleCommand;
 use WPSPCORE\Console\Commands\MakeSeederCommand;
 use WPSPCORE\Console\Commands\MakeShortcodeCommand;
 use WPSPCORE\Console\Commands\MakeTaxonomyCommand;
@@ -42,10 +43,12 @@ class Kernel {
 			MakeNavMenuCommand::class,
 			MakePostTypeCommand::class,
 			MakeRewriteFrontPageCommand::class,
+			MakeScheduleCommand::class,
 			MakeSeederCommand::class,
 			MakeShortcodeCommand::class,
 			MakeTaxonomyCommand::class,
 			MakeTemplateCommand::class,
+
 			class_exists('\WPSPCORE\Migration\Migration') ? MigrationDiffCommand::class : null,
 			class_exists('\WPSPCORE\Migration\Migration') ? MigrationMigrateCommand::class : null,
 		];

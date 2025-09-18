@@ -5,7 +5,7 @@ namespace WPSPCORE\Console\Commands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use WPSPCORE\Traits\CommandsTrait;
+use WPSPCORE\Console\Traits\CommandsTrait;
 
 class MigrationDiffCommand extends Command {
 
