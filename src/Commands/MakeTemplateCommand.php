@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use WPSPCORE\Traits\CommandsTrait;
+use WPSPCORE\Console\Traits\CommandsTrait;
 
 class MakeTemplateCommand extends Command {
 
@@ -41,7 +41,7 @@ class MakeTemplateCommand extends Command {
 		$nameSlugify = Str::slug($name, '_');
 
 		// Check exist.
-		$exist = FileSystem::exists($this->mainPath . '/app/Extend/Components/Templates/' . $nameSlugify . '.php');
+		$exist = FileSystem::exists($this->mainPath . '/app/Extras/Components/Templates/' . $nameSlugify . '.php');
 		if ($exist) {
 			$output->writeln('[ERROR] Template: "' . $name . '" already exists! Please try again.');
 			return Command::FAILURE;
@@ -52,7 +52,7 @@ class MakeTemplateCommand extends Command {
 		$content = str_replace('{{ className }}', $nameSlugify, $content);
 		$content = str_replace('{{ name }}', $name, $content);
 		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Extend/Components/Templates/' . $nameSlugify . '.php', $content);
+		FileSystem::put($this->mainPath . '/app/Extras/Components/Templates/' . $nameSlugify . '.php', $content);
 
 		// Create a view file.
 		$view = FileSystem::get(__DIR__ . '/../Views/Templates/template.view');
