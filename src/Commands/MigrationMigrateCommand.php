@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use WPSPCORE\Console\Traits\CommandsTrait;
+use WPSPCORE\Database\Eloquent;
 
 class MigrationMigrateCommand extends Command {
 
@@ -17,10 +18,27 @@ class MigrationMigrateCommand extends Command {
 			->setName('migration:migrate')
 			->setDescription('Migration migrate.')
 			->setHelp('This command allows you to run migration migrate.')
+			->addOption('fresh', 'fresh', InputOption::VALUE_NONE, 'Fresh database or not?.')
 			->addOption('seed', 'seed', InputOption::VALUE_NONE, 'Run seeders or not?.');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
+
+		// Fresh database.
+		$fresh = $input->getOption('fresh');
+		if ($fresh) {
+			require_once $this->funcs->_getSitePath() . '/wp-load.php';
+			if (class_exists('\WPSPCORE\Database\Eloquent')) {
+				(new Eloquent(
+					$this->funcs->_getMainPath(),
+					$this->funcs->_getRootNamespace(),
+					$this->funcs->_getPrefixEnv()
+				))->global();
+				$this->funcs->_getAppEloquent()->dropAllDatabaseTables();
+			}
+		}
+
+		// Migrate.
 		exec('php bin/migrations migrate -n', $execOutput, $exitCode);
 
 		foreach ($execOutput as $execOutputKey => $execOutputItem) {
@@ -39,6 +57,7 @@ class MigrationMigrateCommand extends Command {
 			}
 		}
 
+		// Seeders.
 		$seed = $input->getOption('seed');
 		if ($seed) {
 			$namespace      = $this->funcs->_getRootNamespace();
