@@ -17,6 +17,7 @@ use WPSPCORE\Console\Commands\MakeNavLocationCommand;
 use WPSPCORE\Console\Commands\MakeNavMenuCommand;
 use WPSPCORE\Console\Commands\MakePostTypeCommand;
 use WPSPCORE\Console\Commands\MakeRewriteFrontPageCommand;
+use WPSPCORE\Console\Commands\MakeRoleCommand;
 use WPSPCORE\Console\Commands\MakeScheduleCommand;
 use WPSPCORE\Console\Commands\MakeSeederCommand;
 use WPSPCORE\Console\Commands\MakeShortcodeCommand;
@@ -43,6 +44,7 @@ class Kernel {
 			MakeNavMenuCommand::class,
 			MakePostTypeCommand::class,
 			MakeRewriteFrontPageCommand::class,
+			MakeRoleCommand::class,
 			MakeScheduleCommand::class,
 			MakeSeederCommand::class,
 			MakeShortcodeCommand::class,

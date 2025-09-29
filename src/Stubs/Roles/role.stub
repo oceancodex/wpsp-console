@@ -1,0 +1,27 @@
+<?php
+
+namespace {{ rootNamespace }}\app\Extras\Components\Roles;
+
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
+use {{ coreNamespace }}\Base\BaseRole;
+
+class {{ className }} extends BaseRole {
+
+	use InstancesTrait;
+
+//	public mixed $role         = '{{ name_slugify }}';
+//	public mixed $display_name = '{{ name_slugify }}';
+//	public mixed $capabilities = [
+//		'edit_pages',
+//		'manage_options',
+//	];
+
+	/*
+	 *
+	 */
+
+	public function customProperties(): void {
+//		$this->capabilities = [];
+	}
+
+}
