@@ -8,14 +8,11 @@ use {{ rootNamespace }}\app\Extras\Instances\Cache\Cache;
 use {{ rootNamespace }}\app\Extras\Instances\Cache\RateLimiter;
 use {{ rootNamespace }}\app\Models\SettingsModel;
 use {{ rootNamespace }}\app\Models\VideosModel;
-use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\app\View\Share;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseAdminPage;
 
 class {{ className }} extends BaseAdminPage {
-
-	use InstancesTrait;
 
 	public mixed  $menu_title                  = '{{ name }}';
 //	public mixed  $page_title                  = '{{ name }}';
