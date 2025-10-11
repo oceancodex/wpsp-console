@@ -15,7 +15,7 @@ class MakeMiddlewareCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:middleware')
 			->setDescription('Create a new middleware.                  | Eg: bin/wpsp make:middleware MyMiddleware')
@@ -23,7 +23,7 @@ class MakeMiddlewareCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the middleware.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

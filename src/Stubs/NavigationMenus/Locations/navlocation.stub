@@ -7,14 +7,14 @@ use {{ coreNamespace }}\Base\BaseNavigationLocation;
 class {{ className }} extends BaseNavigationLocation {
 
 	// Args.
-//	public ?string $location    = '{{ name }}';
-	public ?string $description = 'Navigation menu location "{{ name }}"';
+//	public $location    = '{{ name }}';
+	public $description = 'Navigation menu location "{{ name }}"';
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->location    = '{{ name }}';
 //		$this->description = 'Navigation menu location "{{ name }}"';
 	}

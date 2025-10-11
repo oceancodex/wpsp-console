@@ -17,7 +17,7 @@ class MakeRewriteFrontPageCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:rewrite-front-page')
 			->setDescription('Create a new rewrite front page.          | Eg: bin/wpsp make:rewrite-front-page custom-rewrite-front-page --rewrite-page-post-type=page --rewrite-page-slug=parent/rewrite-front-pages --use-template')
@@ -28,7 +28,7 @@ class MakeRewriteFrontPageCommand extends Command {
 			->addOption('use-template', 'use-template', InputOption::VALUE_NONE, 'Whether this rewrite front page have use template or not?.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$path = $input->getArgument('path');
 
 		// If path is empty.

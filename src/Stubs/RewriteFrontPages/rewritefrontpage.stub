@@ -9,19 +9,19 @@ use {{ coreNamespace }}\Integration\YoastSEO;
 
 class {{ name_slugify }} extends BaseRewriteFrontPage {
 
-	public mixed $path                     = null;
-	public mixed $rewriteIdent             = '{{ path }}';
-	public mixed $useTemplate              = {{ use_template }};
-	public mixed $rewriteFrontPageSlug     = '{{ rewrite_page_slug }}';      // You need create a "Page" with the slug like this.
-	public mixed $rewriteFrontPagePostType = '{{ rewrite_page_post_type }}';
+	public $path                     = null;
+	public $rewriteIdent             = '{{ path }}';
+	public $useTemplate              = {{ use_template }};
+	public $rewriteFrontPageSlug     = '{{ rewrite_page_slug }}';      // You need create a "Page" with the slug like this.
+    public $rewriteFrontPagePostType = '{{ rewrite_page_post_type }}';
 
 	/**
 	 * Private properties.
 	 */
 
-	private mixed $currentURL          = null;
-	private mixed $queryVarGroup1      = null;
-	private mixed $seo                 = null;
+	private $currentURL          = null;
+	private $queryVarGroup1      = null;
+	private $seo                 = null;
 
 	/*
 	 *
@@ -35,11 +35,11 @@ class {{ name_slugify }} extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 		echo 'Rewrite front page for path: ' . $this->path;
 	}
 
-	public function update($path = null): void {
+	public function update($path = null) {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
@@ -50,7 +50,7 @@ class {{ name_slugify }} extends BaseRewriteFrontPage {
 	 *
 	 */
 
-	public function seo(): void {
+	public function seo() {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 
