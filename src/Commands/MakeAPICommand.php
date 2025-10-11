@@ -27,7 +27,7 @@ class MakeAPICommand extends Command {
 			->addOption('ver', 'ver', InputOption::VALUE_OPTIONAL, 'The version of the API end point.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$path = $input->getArgument('path');
 
 		// If path is empty.

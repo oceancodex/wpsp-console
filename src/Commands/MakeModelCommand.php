@@ -28,7 +28,7 @@ class MakeModelCommand extends Command {
 			->addOption('mongodb', 'mongodb', InputOption::VALUE_NONE, 'This is MongoDB model or not?');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');
