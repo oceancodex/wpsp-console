@@ -26,7 +26,7 @@ class MakeScheduleCommand extends Command {
 			->addArgument('interval', InputArgument::OPTIONAL, 'The interval of the schedule.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$hook     = $input->getArgument('hook');
 		$interval = $input->getArgument('interval');
 

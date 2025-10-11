@@ -22,7 +22,7 @@ class MigrationMigrateCommand extends Command {
 			->addOption('seed', 'seed', InputOption::VALUE_NONE, 'Run seeders or not?.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 
 		// Fresh database.
 		$fresh = $input->getOption('fresh');

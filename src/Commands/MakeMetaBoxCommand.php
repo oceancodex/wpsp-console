@@ -26,7 +26,7 @@ class MakeMetaBoxCommand extends Command {
 			->addOption('create-view', 'create-view', InputOption::VALUE_NONE, 'Create view files for this meta box or not?');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$id = $input->getArgument('id');
 
 		$helper = $this->getHelper('question');
