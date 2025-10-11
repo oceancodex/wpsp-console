@@ -28,7 +28,7 @@ class MakeRewriteFrontPageCommand extends Command {
 			->addOption('use-template', 'use-template', InputOption::VALUE_NONE, 'Whether this rewrite front page have use template or not?.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$path = $input->getArgument('path');
 
 		// If path is empty.
