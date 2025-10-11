@@ -22,7 +22,7 @@ class MakeSeederCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the seeder.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$name = $input->getArgument('name');
 
 		// Validate class name.
