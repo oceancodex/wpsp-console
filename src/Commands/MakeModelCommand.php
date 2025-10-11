@@ -17,7 +17,7 @@ class MakeModelCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:model')
 			->setDescription('Create a new model.                       | Eg: bin/wpsp make:model MyModel --table=custom_table --entity=MyEntity')
@@ -28,7 +28,7 @@ class MakeModelCommand extends Command {
 			->addOption('mongodb', 'mongodb', InputOption::VALUE_NONE, 'This is MongoDB model or not?');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

@@ -14,7 +14,7 @@ class MakeSeederCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:seeder')
 			->setDescription('Create a new seeder.                      | Eg: bin/wpsp make:seeder MySeeder')
@@ -22,7 +22,7 @@ class MakeSeederCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the seeder.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		// Validate class name.

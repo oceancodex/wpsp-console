@@ -15,7 +15,7 @@ class MakeNavLocationCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:nav-location')
 			->setDescription('Create a new navigation menu location.    | Eg: bin/wpsp make:nav-location custom_nav_location')
@@ -23,7 +23,7 @@ class MakeNavLocationCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the navigation menu location.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

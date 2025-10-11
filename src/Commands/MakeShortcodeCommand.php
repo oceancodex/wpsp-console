@@ -17,7 +17,7 @@ class MakeShortcodeCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:shortcode')
 			->setDescription('Create a new shortcode.                   | Eg: bin/wpsp make:shortcode custom_shortcode --create-view')
@@ -26,7 +26,7 @@ class MakeShortcodeCommand extends Command {
 			->addOption('create-view', 'create-view', InputOption::VALUE_NONE, 'Create view files for this shortcode or not?');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

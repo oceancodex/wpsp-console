@@ -8,7 +8,12 @@ use {{ coreNamespace }}\Base\BaseMiddleware;
 
 class {{ className }} extends BaseMiddleware {
 
-    public function handle(Request|WP_REST_Request $request): bool {
+	/**
+	 * @param Request|WP_REST_Request $request
+	 *
+	 * @return bool
+	 */
+    public function handle($request) {
         return true;
     }
 

@@ -2,7 +2,6 @@
 
 namespace WPSPCORE\Console;
 
-use Symfony\Component\Console\Application;
 use WPSPCORE\Console\Commands\MakeAdminPageCommand;
 use WPSPCORE\Console\Commands\MakeAjaxCommand;
 use WPSPCORE\Console\Commands\MakeAPICommand;
@@ -28,7 +27,7 @@ use WPSPCORE\Console\Commands\MigrationMigrateCommand;
 
 class Kernel {
 
-	public static function initCommands(Application $application, $mainPath, $rootNamespace, $prefixEnv): void {
+	public static function initCommands($application, $mainPath, $rootNamespace, $prefixEnv) {
 		$commands = [
 			MakeAdminPageCommand::class,
 			MakeAjaxCommand::class,
