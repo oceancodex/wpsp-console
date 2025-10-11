@@ -17,7 +17,7 @@ class MakeAjaxCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:ajax')
 			->setDescription('Create a new Ajax action.                 | Eg: bin/wpsp make:ajax GET my_action --nopriv')
@@ -27,7 +27,7 @@ class MakeAjaxCommand extends Command {
 			->addOption('nopriv', 'nopriv', InputOption::VALUE_NONE, 'Fires non-authenticated Ajax actions for logged-out users.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$method = $input->getArgument('method');
 		$action = $input->getArgument('action');
 

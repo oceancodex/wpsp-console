@@ -14,7 +14,7 @@ class MakeControllerCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:controller')
 			->setDescription('Create a new controller.                  | Eg: bin/wpsp make:controller MyController')
@@ -22,7 +22,7 @@ class MakeControllerCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the controller.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

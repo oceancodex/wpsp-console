@@ -13,7 +13,7 @@ class MigrationMigrateCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('migration:migrate')
 			->setDescription('Migration migrate.')
@@ -22,7 +22,7 @@ class MigrationMigrateCommand extends Command {
 			->addOption('seed', 'seed', InputOption::VALUE_NONE, 'Run seeders or not?.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 
 		// Fresh database.
 		$fresh = $input->getOption('fresh');
