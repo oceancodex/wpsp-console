@@ -27,7 +27,7 @@ class MakeAjaxCommand extends Command {
 			->addOption('nopriv', 'nopriv', InputOption::VALUE_NONE, 'Fires non-authenticated Ajax actions for logged-out users.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$method = $input->getArgument('method');
 		$action = $input->getArgument('action');
 

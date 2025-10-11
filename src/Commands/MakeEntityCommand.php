@@ -25,7 +25,7 @@ class MakeEntityCommand extends Command {
 			->addOption('model', 'model', InputOption::VALUE_OPTIONAL, 'The model of the entity.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

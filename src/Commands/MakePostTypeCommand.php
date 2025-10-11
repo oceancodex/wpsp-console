@@ -23,7 +23,7 @@ class MakePostTypeCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the post type.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

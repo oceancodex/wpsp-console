@@ -18,7 +18,7 @@ class MigrationDiffCommand extends Command {
 			->setHelp('This command allows you to run migration diff.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 
 		$tablePrefix = $this->funcs->_getDBTablePrefix();
 
