@@ -17,7 +17,7 @@ class MakeAdminPageCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:admin-page')
 			->setDescription('Create a new admin page.                  | Eg: bin/wpsp make:admin-page custom-admin-page --create-view')
@@ -26,7 +26,7 @@ class MakeAdminPageCommand extends Command {
 			->addOption('create-view', 'create-view', InputOption::VALUE_NONE, 'Create view files for this admin page or not?');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$path = $input->getArgument('path');
 
 		// If path is empty.

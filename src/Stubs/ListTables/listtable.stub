@@ -14,9 +14,9 @@ class {{ className }} extends BaseListTable {
 
 	use HttpRequestTrait;
 
-//	public ?string $defaultOrder        = 'asc';
-//	public ?string $defaultOrderBy      = 'id';
-	public ?array  $removeQueryVars     = [
+//	public $defaultOrder        = 'asc';
+//	public $defaultOrderBy      = 'id';
+	public $removeQueryVars     = [
 		'_wp_http_referer',
 		'_wpnonce',
 		'action',
@@ -26,24 +26,24 @@ class {{ className }} extends BaseListTable {
 	];
 
 	// Request parameters.
-	private ?string $page               = null;
-	private ?string $tab                = null;
-	private ?string $type               = null;
-	private ?string $search             = null;
-	private ?string $option             = null;
-	private ?string $paged              = null;
-	private ?int    $total_items        = 0;
-	private ?string $orderby            = 'id';
-	private ?string $order              = 'asc';
+	private $page               = null;
+	private $tab                = null;
+	private $type               = null;
+	private $search             = null;
+	private $option             = null;
+	private $paged              = null;
+	private $total_items        = 0;
+	private $orderby            = 'id';
+	private $order              = 'asc';
 
-	private ?string $url                = null;
-	private ?string $prefixScreenOption = null;
-	private ?int    $itemsPerPage       = 10;
+	private $url                = null;
+	private $prefixScreenOption = null;
+	private $itemsPerPage       = 10;
 
 	/**
 	 * Override construct to assign some variables.
 	 */
-	public function customProperties(): void {
+	public function customProperties() {
 		$this->page         = self::request()->get('page');
 		$this->paged        = self::request()->get('paged');
 		$this->tab          = self::request()->get('tab');
@@ -69,7 +69,7 @@ class {{ className }} extends BaseListTable {
 	 * Data.
 	 */
 
-	public function get_data(): array {
+	public function get_data() {
 //		$model             = \{{ rootNamespace }}\app\Models\AccountsModel::query();
 		$model             = \{{ rootNamespace }}\app\Models\SettingsModel::query();
 //		$model             = \{{ rootNamespace }}\app\Models\VideosModel::query();
@@ -114,7 +114,7 @@ class {{ className }} extends BaseListTable {
 		);
 	}
 
-	public function get_columns(): array {
+	public function get_columns() {
 		return [
 			'cb'    => '<input type="checkbox" />',
 			'id'    => 'ID',
@@ -139,7 +139,7 @@ class {{ className }} extends BaseListTable {
 		}
 	}
 
-	public function get_sortable_columns(): array {
+	public function get_sortable_columns() {
 		return [
 			'id'    => ['id', false],
 //			'_id'   => ['_id', false],
@@ -150,7 +150,7 @@ class {{ className }} extends BaseListTable {
 		];
 	}
 
-	public function column_name($item): string {
+	public function column_name($item) {
 		$actions = [
 			'edit'   => sprintf('<a href="?page=%s&action=%s&item=%s">Edit</a>', $_REQUEST['page'], 'edit', $item['name']),
 			'delete' => sprintf('<a href="?page=%s&action=%s&item=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['name']),
@@ -163,7 +163,7 @@ class {{ className }} extends BaseListTable {
 	 * Prepare items.
 	 */
 
-	public function prepare_items(): void {
+	public function prepare_items() {
 
 		// Handle bulk actions.
 		$this->process_bulk_action();
@@ -195,7 +195,7 @@ class {{ className }} extends BaseListTable {
 	 * View links.
 	 */
 
-	public function get_views(): array {
+	public function get_views() {
 		return [
 			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(10)</span></a>',
 			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(5)</span></a>',
@@ -206,7 +206,7 @@ class {{ className }} extends BaseListTable {
 	 * Bulk actions.
 	 */
 
-	public function get_bulk_actions(): array {
+	public function get_bulk_actions() {
 
 		// Prepare all bulk actions.
 		return [
@@ -214,7 +214,7 @@ class {{ className }} extends BaseListTable {
 		];
 	}
 
-	public function process_bulk_action(): void {
+	public function process_bulk_action() {
 
 		// Security check.
 		if (!empty($_REQUEST['_wpnonce']) && $nonce = $_REQUEST['_wpnonce']) {
@@ -240,7 +240,7 @@ class {{ className }} extends BaseListTable {
 	 * Extra table nav.
 	 */
 
-	public function extra_tablenav($which): void {
+	public function extra_tablenav($which) {
 
 		if ($which == 'top') {
 			echo '<div class="alignleft actions bulkactions">';
@@ -257,7 +257,7 @@ class {{ className }} extends BaseListTable {
 	 * Other functions.
 	 */
 
-	public function usort_reorder($a, $b): int {
+	public function usort_reorder($a, $b) {
 		$orderby = (!empty($_GET['orderby'])) ? $_GET['orderby'] : $this->defaultOrderBy;
 		$order   = (!empty($_GET['order'])) ? $_GET['order'] : $this->defaultOrder;
 		$result  = strnatcmp($a[$orderby], $b[$orderby]);

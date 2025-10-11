@@ -7,13 +7,13 @@ use {{ coreNamespace }}\Base\BaseShortcode;
 
 class {{ className }} extends BaseShortcode {
 
-//	public mixed $shortcode = null;
+//	public $shortcode = null;
 
 	/*
 	 *
 	 */
 
-	public function index($atts, $content, $tag): string {
+	public function index($atts, $content, $tag) {
 		return do_shortcode($content);
 	}
 
@@ -22,7 +22,7 @@ class {{ className }} extends BaseShortcode {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->shortcode = 'custom_shortcode';
 	}
 

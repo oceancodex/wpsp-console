@@ -14,29 +14,29 @@ use {{ coreNamespace }}\Base\BaseAdminPage;
 
 class {{ className }} extends BaseAdminPage {
 
-	public mixed  $menu_title                  = '{{ name }}';
-//	public mixed  $page_title                  = '{{ name }}';
-	public mixed  $capability                  = 'manage_options';
-//	public mixed  $menu_slug                   = '{{ path_slugify }}';
-	public mixed  $icon_url                    = 'dashicons-admin-generic';
-//	public mixed  $position                    = 2;
-//	public mixed  $parent_slug                 = 'options-general.php';
-//	public mixed  $is_submenu_page             = false;
-//	public mixed  $remove_first_submenu        = false;
-//	public ?array $urls_highlight_current_menu = null;
-//	public mixed  $custom_properties           = null;
-//	public mixed  $callback_function           = null;
+	public  $menu_title                  = '{{ name }}';
+//	public  $page_title                  = '{{ name }}';
+	public  $capability                  = 'manage_options';
+//	public  $menu_slug                   = '{{ path_slugify }}';
+	public  $icon_url                    = 'dashicons-admin-generic';
+//	public  $position                    = 2;
+//	public  $parent_slug                 = 'options-general.php';
+//	public  $is_submenu_page             = false;
+//	public  $remove_first_submenu        = false;
+//	public  $urls_highlight_current_menu = null;
+//	public  $custom_properties           = null;
+//	public  $callback_function           = null;
 
-//	private mixed $checkDatabase               = null;
-	private mixed $table                       = null;
-	private mixed $currentTab                  = null;
-	private mixed $currentPage                 = null;
+//	private $checkDatabase               = null;
+	private $table                       = null;
+	private $currentTab                  = null;
+	private $currentPage                 = null;
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->menu_title                  = '';
 //		$this->page_title                  = '';
 //		$this->capability                  = '';
@@ -64,16 +64,16 @@ class {{ className }} extends BaseAdminPage {
 	 *
 	 */
 
-//	public function init($path = null): void {
+//	public function init($path = null) {
 //		// You must call to parent method "init" if you want to custom it.
 //		parent::init();
 //
 //      // Your code here...
 //	}
 
-	public function beforeInit(): void {}
+	public function beforeInit() {}
 
-	public function afterInit(): void {
+	public function afterInit() {
 		// Custom highlight current menu.
 //		if (preg_match('/' . $this->menu_slug . '$|' . $this->menu_slug . '&updated=true$/', $this->request->getRequestUri())) {
 //			add_filter('submenu_file', function($submenu_file) {
@@ -100,13 +100,13 @@ class {{ className }} extends BaseAdminPage {
 //		}
 	}
 
-	public function afterLoad($adminPage): void {
+	public function afterLoad($adminPage) {
 //		if ($this->request->get('tab') == 'table') {
 //			$this->table = new \{{ rootNamespace }}\app\Extras\Components\ListTables\Settings();
 //		}
 	}
 
-//	public function screenOptions($adminPage): void {
+//	public function screenOptions($adminPage) {
 //		if ($this->request->get('tab') == 'table') {
 //			parent::screenOptions($adminPage);
 //		}
@@ -116,7 +116,7 @@ class {{ className }} extends BaseAdminPage {
 	 *
 	 */
 
-	public function index(): void {
+	public function index() {
 		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
 			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
 		}
@@ -143,7 +143,7 @@ class {{ className }} extends BaseAdminPage {
 		}
 	}
 
-	public function update(): void {
+	public function update() {
 //		try {
 //			$tab = $this->request->get('tab');
 //			if ($tab !== 'table') {
@@ -181,7 +181,7 @@ class {{ className }} extends BaseAdminPage {
 	 *
 	 */
 
-	public function styles(): void {
+	public function styles() {
 //		wp_enqueue_style(
 //			Funcs::config('app.short_name') . '-admin',
 //			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
@@ -190,7 +190,7 @@ class {{ className }} extends BaseAdminPage {
 //		);
 	}
 
-	public function scripts(): void {
+	public function scripts() {
 //		wp_enqueue_script(
 //			Funcs::config('app.short_name') . '-database',
 //			Funcs::instance()->_getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js',
@@ -200,7 +200,7 @@ class {{ className }} extends BaseAdminPage {
 //		);
 	}
 
-	public function localizeScripts(): void {
+	public function localizeScripts() {
 //		wp_localize_script(
 //			Funcs::config('app.short_name') . '-database',
 //			Funcs::config('app.short_name') . '_localize',

@@ -7,17 +7,17 @@ use {{ coreNamespace }}\Base\BaseMetaBox;
 
 class {{ className }} extends BaseMetaBox {
 
-//	public mixed $title         = 'Custom Meta Box "{{ id }}" Title';
-//	public mixed $screen        = 'post';
-//	public mixed $context       = 'advanced';
-//	public mixed $priority      = 'default';
-//	public mixed $callback_args = null;
+//	public $title         = 'Custom Meta Box "{{ id }}" Title';
+//	public $screen        = 'post';
+//	public $context       = 'advanced';
+//	public $priority      = 'default';
+//	public $callback_args = null;
 
 	/*
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->title = 'Custom Meta Box "{{ id }}" Title Override';
 	}
 
@@ -25,7 +25,7 @@ class {{ className }} extends BaseMetaBox {
 	 *
 	 */
 
-	public function index($post, $meta_box): void {
+	public function index($post, $meta_box) {
 		echo 'Custom Meta Box "{{ id }}" Content';
 	}
 

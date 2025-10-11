@@ -16,7 +16,7 @@ class MakeAPICommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:api')
 			->setDescription('Create a new API end point.               | Eg: bin/wpsp make:api my-api-endpoint')
@@ -27,7 +27,7 @@ class MakeAPICommand extends Command {
 			->addOption('ver', 'ver', InputOption::VALUE_OPTIONAL, 'The version of the API end point.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$path = $input->getArgument('path');
 
 		// If path is empty.
