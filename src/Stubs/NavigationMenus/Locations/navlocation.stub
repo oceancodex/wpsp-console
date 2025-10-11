@@ -2,12 +2,9 @@
 
 namespace {{ rootNamespace }}\app\Extras\Components\NavigationMenus\Locations;
 
-use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BaseNavigationLocation;
 
 class {{ className }} extends BaseNavigationLocation {
-
-	use InstancesTrait;
 
 	// Args.
 //	public ?string $location    = '{{ name }}';
