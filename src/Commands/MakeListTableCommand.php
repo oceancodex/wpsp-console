@@ -14,7 +14,7 @@ class MakeListTableCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:list-table')
 			->setDescription('Create a new list table.                  | Eg: bin/wpsp make:list-table MyListTable')
@@ -22,7 +22,7 @@ class MakeListTableCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the list table.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

@@ -7,7 +7,7 @@ use {{ coreNamespace }}\Base\BaseSchedule;
 
 class {{ className }} extends BaseSchedule {
 
-	public function run(): void {
+	public function run() {
         // Code here.
 	}
 

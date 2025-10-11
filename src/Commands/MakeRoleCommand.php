@@ -15,7 +15,7 @@ class MakeRoleCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:role')
 			->setDescription('Create a new role.                        | Eg: bin/wpsp make:role custom_role')
@@ -23,7 +23,7 @@ class MakeRoleCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the role.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');
