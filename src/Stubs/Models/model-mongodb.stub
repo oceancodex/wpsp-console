@@ -45,11 +45,11 @@ class {{ className }} extends Model {
 //	public    $usesUniqueIds;
 //	public    $wasRecentlyCreated;
 
-//	protected static array $observers = [
+//	protected static $observers = [
 //		\{{ rootNamespace }}\app\Observers\{{ className }}Observer::class,
 //	];
 
-//	public function __construct(array $attributes = []) {
+//	public function __construct($attributes = []) {
 //		$this->getConnection()->setTablePrefix('wp_{{ tablePrefix }}');
 //		$this->setConnection('wordpress');
 //		parent::__construct($attributes);

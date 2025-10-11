@@ -17,7 +17,7 @@ class MakeMetaBoxCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:meta-box')
 			->setDescription('Create a new meta box.                    | Eg: bin/wpsp make:meta-box custom_meta_box --create-view')
@@ -26,7 +26,7 @@ class MakeMetaBoxCommand extends Command {
 			->addOption('create-view', 'create-view', InputOption::VALUE_NONE, 'Create view files for this meta box or not?');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$id = $input->getArgument('id');
 
 		$helper = $this->getHelper('question');

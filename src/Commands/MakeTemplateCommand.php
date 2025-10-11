@@ -15,7 +15,7 @@ class MakeTemplateCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:template')
 			->setDescription('Create a new page template.               | Eg: bin/wpsp make:template custom_template')
@@ -23,7 +23,7 @@ class MakeTemplateCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the template.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');

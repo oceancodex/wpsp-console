@@ -15,7 +15,7 @@ class MakeMigrationCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:migration')
 			->setDescription('Create a new migration.                   | Eg: bin/wpsp make:migration custom_migration')
@@ -23,7 +23,7 @@ class MakeMigrationCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the migration.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name   = $input->getArgument('name');
 		$helper = $this->getHelper('question');
 		if (!$name) {

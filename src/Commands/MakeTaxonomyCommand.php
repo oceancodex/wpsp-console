@@ -15,7 +15,7 @@ class MakeTaxonomyCommand extends Command {
 
 	use CommandsTrait;
 
-	protected function configure(): void {
+	protected function configure() {
 		$this
 			->setName('make:taxonomy')
 			->setDescription('Create a new taxonomy.                    | Eg: bin/wpsp make:taxonomy custom_taxonomy')
@@ -23,7 +23,7 @@ class MakeTaxonomyCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the taxonomy.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): int {
+	protected function execute(InputInterface $input, OutputInterface $output) {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');
