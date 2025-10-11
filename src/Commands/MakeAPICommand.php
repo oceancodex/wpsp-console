@@ -22,6 +22,7 @@ class MakeAPICommand extends Command {
 			->setDescription('Create a new API end point.               | Eg: bin/wpsp make:api my-api-endpoint')
 			->setHelp('This command allows you to create an API end point.')
 			->addArgument('path', InputArgument::OPTIONAL, 'The path of the API end point.')
+			->addOption('method', 'method', InputOption::VALUE_OPTIONAL, 'The method of the API end point.')
 			->addOption('namespace', 'namespace', InputOption::VALUE_OPTIONAL, 'The namespace of the API end point.')
 			->addOption('ver', 'ver', InputOption::VALUE_OPTIONAL, 'The version of the API end point.');
 	}
@@ -34,6 +35,9 @@ class MakeAPICommand extends Command {
 		if (!$path) {
 			$pathQuestion = new Question('Please enter the path of the API end point: ');
 			$path         = $helper->ask($input, $output, $pathQuestion);
+
+			$methodQuestion = new Question('Please enter the method of the API end point (blank is "get"): ');
+			$method         = $helper->ask($input, $output, $methodQuestion);
 
 			$namespaceQuestion = new Question('Please enter the namespace of the API end point (blank is "' . $this->funcs->_getAppShortName() . '"): ');
 			$namespace         = $helper->ask($input, $output, $namespaceQuestion);
@@ -51,6 +55,9 @@ class MakeAPICommand extends Command {
 		$pathSlugify = Str::slug($path);
 		$name        = $path;
 		$nameSlugify = Str::slug($name, '_');
+
+		$method = $method ?? $input->getOption('method') ?: '';
+		$method = strtolower($method);
 
 		$namespace = $namespace ?? $input->getOption('namespace') ?: '';
 		if ($namespace) {
@@ -74,6 +81,7 @@ class MakeAPICommand extends Command {
 		$func = str_replace('{{ name_slugify }}', $nameSlugify, $func);
 		$func = str_replace('{{ path }}', $path, $func);
 		$func = str_replace('{{ path_slugify }}', $pathSlugify, $func);
+		$func = str_replace('{{ method }}', $method, $func);
 		$func = str_replace('{{ namespace }}', $namespace, $func);
 		$func = str_replace('{{ ver }}', $ver, $func);
 
@@ -83,6 +91,7 @@ class MakeAPICommand extends Command {
 		$use = str_replace('{{ name_slugify }}', $nameSlugify, $use);
 		$use = str_replace('{{ path }}', $path, $use);
 		$use = str_replace('{{ path_slugify }}', $pathSlugify, $use);
+		$use = str_replace('{{ method }}', $method, $use);
 		$use = str_replace('{{ namespace }}', $namespace, $use);
 		$use = str_replace('{{ ver }}', $ver, $use);
 		$use = $this->replaceNamespaces($use);

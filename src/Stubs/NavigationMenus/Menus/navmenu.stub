@@ -2,12 +2,9 @@
 
 namespace {{ rootNamespace }}\app\Extras\Components\NavigationMenus\Menus;
 
-use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BaseNavigationMenu;
 
 class {{ className }} extends BaseNavigationMenu {
-
-	use InstancesTrait;
 
 	// Args.
 //	public $menu                 = 'menu-1';

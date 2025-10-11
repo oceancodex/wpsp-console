@@ -8,13 +8,13 @@ use WPSPCORE\Funcs;
 
 trait CommandsTrait {
 
-	public        $mainPath      = null;
-	public        $rootNamespace = null;
-	public        $prefixEnv     = null;
-	public ?Funcs $funcs         = null;
-	public string $coreNamespace = 'WPSPCORE';
+	public ?string $mainPath      = null;
+	public ?string $rootNamespace = null;
+	public ?string $prefixEnv     = null;
+	public ?Funcs  $funcs         = null;
+	public string  $coreNamespace = 'WPSPCORE';
 
-	public function __construct($name = null, $mainPath = null, $rootNamespace = null, $prefixEnv = null) {
+	public function __construct(?string $name = null, ?string $mainPath = null, ?string $rootNamespace = null, ?string $prefixEnv = null) {
 		parent::__construct($name);
 		$this->mainPath      = $mainPath;
 		$this->rootNamespace = $rootNamespace;
@@ -27,7 +27,7 @@ trait CommandsTrait {
 		return str_replace('{{ coreNamespace }}', $this->coreNamespace, $content);
 	}
 
-	public function validateClassName($output, $className = null) {
+	public function validateClassName($output, $className = null): void {
 		if (empty($className) || preg_match('/[^A-Za-z0-9_]/', $className)) {
 			$output->writeln('[ERROR] The name: "' . $className . '" is invalid! Please try again.');
 			exit(Command::INVALID);
@@ -46,7 +46,7 @@ trait CommandsTrait {
 	 *
 	 */
 
-	public function saveRouteContent($routeName, $content) {
+	public function saveRouteContent($routeName, $content): void {
 		FileSystem::put($this->mainPath . '/routes/'.$routeName.'.php', $content);
 	}
 
@@ -54,7 +54,7 @@ trait CommandsTrait {
 	 *
 	 */
 
-	public function addClassToRoute($routeName, $findFunction, $newLineForFindFunction, $newLineUseClass) {
+	public function addClassToRoute($routeName, $findFunction, $newLineForFindFunction, $newLineUseClass): void {
 		$routeContent = $this->getRouteContent($routeName);
 		$routeContent = preg_replace('/public function ' . $findFunction . '([\S\s]*?)\{/iu', 'public function ' . $findFunction . "$1{\n" . $newLineForFindFunction, $routeContent);
 		if (!strpos($routeContent, $newLineUseClass) !== false) {

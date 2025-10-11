@@ -3,12 +3,9 @@
 namespace {{ rootNamespace }}\app\Extras\Components\Schedules;
 
 use {{ rootNamespace }}\Funcs;
-use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BaseSchedule;
 
 class {{ className }} extends BaseSchedule {
-
-	use InstancesTrait;
 
 	public function run() {
         // Code here.
