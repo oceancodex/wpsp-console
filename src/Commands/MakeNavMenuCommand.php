@@ -22,7 +22,7 @@ class MakeNavMenuCommand extends Command {
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the navigation menu.');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$name = $input->getArgument('name');
 
 		$helper = $this->getHelper('question');
