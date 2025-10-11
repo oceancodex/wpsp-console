@@ -2,7 +2,6 @@
 
 namespace WPSPCORE\Console;
 
-use Symfony\Component\Console\Application;
 use WPSPCORE\Console\Commands\MakeAdminPageCommand;
 use WPSPCORE\Console\Commands\MakeAjaxCommand;
 use WPSPCORE\Console\Commands\MakeAPICommand;
@@ -17,6 +16,7 @@ use WPSPCORE\Console\Commands\MakeNavLocationCommand;
 use WPSPCORE\Console\Commands\MakeNavMenuCommand;
 use WPSPCORE\Console\Commands\MakePostTypeCommand;
 use WPSPCORE\Console\Commands\MakeRewriteFrontPageCommand;
+use WPSPCORE\Console\Commands\MakeRoleCommand;
 use WPSPCORE\Console\Commands\MakeScheduleCommand;
 use WPSPCORE\Console\Commands\MakeSeederCommand;
 use WPSPCORE\Console\Commands\MakeShortcodeCommand;
@@ -27,7 +27,7 @@ use WPSPCORE\Console\Commands\MigrationMigrateCommand;
 
 class Kernel {
 
-	public static function initCommands(Application $application, $mainPath, $rootNamespace, $prefixEnv) {
+	public static function initCommands($application, $mainPath, $rootNamespace, $prefixEnv) {
 		$commands = [
 			MakeAdminPageCommand::class,
 			MakeAjaxCommand::class,
@@ -43,6 +43,7 @@ class Kernel {
 			MakeNavMenuCommand::class,
 			MakePostTypeCommand::class,
 			MakeRewriteFrontPageCommand::class,
+			MakeRoleCommand::class,
 			MakeScheduleCommand::class,
 			MakeSeederCommand::class,
 			MakeShortcodeCommand::class,
