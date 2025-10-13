@@ -12,11 +12,13 @@ use {{ rootNamespace }}\Funcs;
  */
 final class {{ className }} extends AbstractMigration {
 
-    public function getDescription() {
+//	protected $connection = 'mongodb';
+
+    public function getDescription(): string {
         return '';
     }
 
-    public function up(Schema $schema) {
+    public function up(Schema $schema): void {
 
         /** Create new database table */
 //	    $table = $schema->createTable(Funcs::getDBCustomMigrationTableName('my_custom_table'));
@@ -37,7 +39,7 @@ final class {{ className }} extends AbstractMigration {
 //		$table->addForeignKeyConstraint('authors', ['author_id'], ['id'], ['onUpdate' => 'CASCADE']);
     }
 
-    public function down(Schema $schema) {
+    public function down(Schema $schema): void {
 //	    $schema->dropTable(Funcs::getDBCustomMigrationTableName('my_custom_table'));
     }
 
