@@ -6,13 +6,13 @@ use Symfony\Contracts\Cache\ItemInterface;
 use {{ rootNamespace }}\app\Extras\Instances\Cache\Cache;
 use {{ rootNamespace }}\app\Models\PostsModel;
 use {{ rootNamespace }}\app\Models\SettingsModel;
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseListTable;
-use {{ coreNamespace }}\Traits\HttpRequestTrait;
 
 class {{ className }} extends BaseListTable {
 
-	use HttpRequestTrait;
+	use InstancesTrait;
 
 //	public $defaultOrder        = 'asc';
 //	public $defaultOrderBy      = 'id';
@@ -44,16 +44,16 @@ class {{ className }} extends BaseListTable {
 	 * Override construct to assign some variables.
 	 */
 	public function customProperties() {
-		$this->page         = self::request()->get('page');
-		$this->paged        = self::request()->get('paged');
-		$this->tab          = self::request()->get('tab');
-		$this->type         = self::request()->get('type');
-		$this->search       = self::request()->get('s');
-		$this->option       = self::request()->get('c');
-		$this->orderby      = self::request()->get('orderby') ?: $this->orderby;
-		$this->order        = self::request()->get('order') ?: $this->order;
+		$this->page         = Funcs::instance()->request->get('page');
+		$this->paged        = Funcs::instance()->request->get('paged');
+		$this->tab          = Funcs::instance()->request->get('tab');
+		$this->type         = Funcs::instance()->request->get('type');
+		$this->search       = Funcs::instance()->request->get('s');
+		$this->option       = Funcs::instance()->request->get('c');
+		$this->orderby      = Funcs::instance()->request->get('orderby') ?: $this->orderby;
+		$this->order        = Funcs::instance()->request->get('order') ?: $this->order;
 
-		$this->url          = Funcs::instance()->_buildUrl(self::request()->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
+		$this->url          = Funcs::instance()->_buildUrl(Funcs::instance()->request->getBaseUrl(), ['page' => $this->page, 'tab' => $this->tab]);
 		$this->url          .= $this->search ? '&s=' . $this->search : '';
 		$this->url          .= $this->option ? '&c=' . $this->option : '';
 
@@ -70,37 +70,47 @@ class {{ className }} extends BaseListTable {
 	 */
 
 	public function get_data() {
-//		$model             = \{{ rootNamespace }}\app\Models\AccountsModel::query();
-		$model             = \{{ rootNamespace }}\app\Models\SettingsModel::query();
-//		$model             = \{{ rootNamespace }}\app\Models\VideosModel::query();
+		try {
+//			$model = \{{ rootNamespace }}\app\Models\AccountsModel::query();
+			$model = \{{ rootNamespace }}\app\Models\SettingsModel::query();
+//			$model = \{{ rootNamespace }}\app\Models\VideosModel::query();
 
-		$this->total_items = $model->count();
+			$this->total_items = $model->count();
 
-		/**
-		 * Cache total items.
-		 */
-//		$totalCacheKey = 'list_table_settings_total_items';
-//		Cache::delete($totalCacheKey);
-//		$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->count();
-//		});
-//		$this->total_items = $model->count();
+			/**
+			 * Cache total items.
+			 */
+//			$totalCacheKey = 'list_table_settings_total_items';
+//			Cache::delete($totalCacheKey);
+//			$this->total_items = Cache::get($totalCacheKey, function(ItemInterface $item) use ($model) {
+//				$item->expiresAfter(60); //	 Cache in seconds.
+//				return $model->count();
+//			});
+//			$this->total_items = $model->count();
 
-		$take              = $this->itemsPerPage;
-		$skip              = ($this->paged - 1) * $take;
+			$take              = $this->itemsPerPage;
+			$skip              = ($this->paged - 1) * $take;
 
-		/**
-		 * Cache data.
-		 */
-//		$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
-//		Cache::delete($dataCacheKey);
-//		return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
-//			$item->expiresAfter(60); // Cache in seconds.
-//			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
-//		});
+			/**
+			 * Cache data.
+			 */
+//			$dataCacheKey = 'list_table_settings_' . $this->itemsPerPage . '_' . $this->paged;
+//			Cache::delete($dataCacheKey);
+//			return Cache::get($dataCacheKey, function (ItemInterface $item) use ($model, $take, $skip) {
+//				$item->expiresAfter(60); //	 Cache in seconds.
+//				return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+//			});
 
-		return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+			return $model->orderBy($this->orderby, $this->order)->skip($skip)->take($take)->get()->toArray();
+		}
+		catch (\Exception|\Throwable $e) {
+			Funcs::notice($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine(), 'error', true);
+			return [
+				['id' => 1, '_id' => 1, 'key' => 'Key 1', 'value' => 'Value 1'],
+				['id' => 2, '_id' => 2, 'key' => 'Key 2', 'value' => 'Value 2'],
+                ['id' => 3, '_id' => 3, 'key' => 'Key 3', 'value' => 'Value 3']
+			];
+		}
 	}
 
 	/**
@@ -197,8 +207,8 @@ class {{ className }} extends BaseListTable {
 
 	public function get_views() {
 		return [
-			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(10)</span></a>',
-			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(5)</span></a>',
+			'all'       => '<a href="' . $this->url . '" class="' . (($this->type == 'all' || !$this->type) ? 'current' : '') . '">All <span class="count">(' . $this->total_items . ')</span></a>',
+			'published' => '<a href="' . $this->url . '&type=published" class="' . ($this->type == 'published' ? 'current' : '') . '">Published <span class="count">(' . $this->total_items . ')</span></a>',
 		];
 	}
 
@@ -225,7 +235,7 @@ class {{ className }} extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				$items = self::request()->get('items');
+				$items = Funcs::instance()->request->get('items');
 				if (!empty($items)) {
 					SettingsModel::query()->whereIn('id', $items)->delete();
 				}

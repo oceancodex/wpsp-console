@@ -9,19 +9,19 @@ use {{ coreNamespace }}\Integration\YoastSEO;
 
 class {{ name_slugify }} extends BaseRewriteFrontPage {
 
-	public $path                     = null;
+//	public $path                     = null;
 	public $rewriteIdent             = '{{ path }}';
 	public $useTemplate              = {{ use_template }};
-	public $rewriteFrontPageSlug     = '{{ rewrite_page_slug }}';      // You need create a "Page" with the slug like this.
-    public $rewriteFrontPagePostType = '{{ rewrite_page_post_type }}';
+	public $rewriteFrontPageSlug     = '{{ rewrite_page_slug }}'; // You need create a "Page" with the slug like this.
+	public $rewriteFrontPagePostType = '{{ rewrite_page_post_type }}';
 
 	/**
 	 * Private properties.
 	 */
 
-	private $currentURL          = null;
-	private $queryVarGroup1      = null;
-	private $seo                 = null;
+	private $currentURL     = null;
+	private $queryVarGroup1 = null;
+	private $seo            = null;
 
 	/*
 	 *
@@ -43,7 +43,6 @@ class {{ name_slugify }} extends BaseRewriteFrontPage {
 //		global $wp_query, $post;
 //		echo '<pre>'; print_r($wp_query); echo '</pre>';
 		echo '<pre>'; print_r($this->request->request->all()); echo '</pre>';
-//		echo '<pre>'; print_r($wp_query); echo '</pre>';
 	}
 
 	/*
