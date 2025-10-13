@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"require": {
 		"php": "^7.4",
-		"symfony/console": "^v5.4.42"
+		"symfony/console": "^v5.4.47"
 	},
 	"config": {
 		"sort-packages": true

@@ -35,7 +35,7 @@ class {{ className }} extends BaseNavigationMenu {
 		$this->args->fallback_cb = $this->fallback();
 	}
 
-	public function fallback(): \Closure {
+	public function fallback() {
 		return function () {
 			return 'Menu 1 fallback...';
 		};

@@ -6,9 +6,9 @@ use {{ coreNamespace }}\Base\BaseRole;
 
 class {{ className }} extends BaseRole {
 
-//	public mixed $role         = '{{ name_slugify }}';
-//	public mixed $display_name = '{{ name_slugify }}';
-//	public mixed $capabilities = [
+//	public $role         = '{{ name_slugify }}';
+//	public $display_name = '{{ name_slugify }}';
+//	public $capabilities = [
 //		'edit_pages',
 //		'manage_options',
 //	];
@@ -17,7 +17,7 @@ class {{ className }} extends BaseRole {
 	 *
 	 */
 
-	public function customProperties(): void {
+	public function customProperties() {
 //		$this->capabilities = [];
 	}
 

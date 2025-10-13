@@ -60,9 +60,14 @@ class MigrationMigrateCommand extends Command {
 		// Seeders.
 		$seed = $input->getOption('seed');
 		if ($seed) {
-			$namespace      = $this->funcs->_getRootNamespace();
-			$databaseSeeder = $namespace . '\\database\\seeders\\DatabaseSeeder';
-			(new $databaseSeeder($output))->run();
+			try {
+				$namespace      = $this->funcs->_getRootNamespace();
+				$databaseSeeder = $namespace . '\\database\\seeders\\DatabaseSeeder';
+				(new $databaseSeeder($output))->run();
+			}
+			catch (\Exception|\Throwable $e) {
+				$output->writeln('<fg=red>' . $e->getMessage() . '  </>');
+			}
 		}
 
 		// Output message.
