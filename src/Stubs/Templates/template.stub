@@ -7,7 +7,8 @@ use {{ coreNamespace }}\Base\BaseTemplates;
 
 class {{ className }} extends BaseTemplates {
 
-	public $label = '[WPSP] Template: {{ name }}';
+//	public $name  = '{{ name }}';
+	public $label = '[{{ rootNamespace }}] Template: {{ name }}';
 //	public $path  = null;
 
 	public function customProperties() {

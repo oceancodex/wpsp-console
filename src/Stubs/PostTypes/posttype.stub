@@ -17,8 +17,8 @@ class {{ className }} extends BasePostType {
 //	public $post_type                       = '{{ name }}'; // Override the post type.
 
 	/** Labels. */
-//	public $name                            = null;
-//	public $singular_name                   = '{{ name }}';
+	public $name                            = '{{ name }}';
+//	public $singular_name                   = '';
 //	public $add_new                         = '';
 //	public $add_new_item                    = '';
 //	public $edit_item                       = '';
