@@ -2,14 +2,12 @@
 
 namespace {{ rootNamespace }}\app\Http\Middleware;
 
-use WP_REST_Request;
-use Symfony\Component\HttpFoundation\Request;
 use {{ coreNamespace }}\Base\BaseMiddleware;
 
 class {{ className }} extends BaseMiddleware {
 
 	/**
-	 * @param Request|WP_REST_Request $request
+	 * @param \Symfony\Component\HttpFoundation\Request|\WP_REST_Request $request
 	 *
 	 * @return bool
 	 */

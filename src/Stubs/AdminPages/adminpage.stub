@@ -7,30 +7,33 @@ use {{ rootNamespace }}\app\Extras\Components\License\License;
 use {{ rootNamespace }}\app\Extras\Instances\Cache\Cache;
 use {{ rootNamespace }}\app\Extras\Instances\Cache\RateLimiter;
 use {{ rootNamespace }}\app\Models\SettingsModel;
+use {{ rootNamespace }}\app\Models\UsersModel;
 use {{ rootNamespace }}\app\Models\VideosModel;
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\app\View\Share;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseAdminPage;
 
 class {{ className }} extends BaseAdminPage {
 
-	public  $menu_title                  = '{{ name }}';
-//	public  $page_title                  = '{{ name }}';
-	public  $capability                  = 'manage_options';
-//	public  $menu_slug                   = '{{ path_slugify }}';
-	public  $icon_url                    = 'dashicons-admin-generic';
-//	public  $position                    = 2;
-//	public  $parent_slug                 = 'options-general.php';
-//	public  $is_submenu_page             = false;
-//	public  $remove_first_submenu        = false;
-//	public  $urls_highlight_current_menu = null;
-//	public  $custom_properties           = null;
-//	public  $callback_function           = null;
+	use InstancesTrait;
 
-//	private $checkDatabase               = null;
-	private $table                       = null;
-	private $currentTab                  = null;
-	private $currentPage                 = null;
+	public $menu_title                  = '{{ name }}';
+//	public $page_title                  = '{{ name }}';
+	public $capability                  = 'manage_options';
+//	public $menu_slug                   = '{{ path_slugify }}';
+	public $icon_url                    = 'dashicons-admin-generic';
+//	public $position                    = 2;
+//	public $parent_slug                 = 'options-general.php';
+//	public $is_submenu_page             = false;
+//	public $remove_first_submenu        = false;
+//	public $urls_highlight_current_menu = null;
+//	public $callback_function           = null;
+
+//	private $checkDatabase              = null;
+	private $table                      = null;
+	private $currentTab                 = null;
+	private $currentPage                = null;
 
 	/*
 	 *
@@ -51,7 +54,7 @@ class {{ className }} extends BaseAdminPage {
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
-		if (class_exists('\WPSPCORE\Translation\Translator')) {
+		if (class_exists('\{{ coreNamespace }}\Translation\Translator')) {
 			$this->page_title = ($this->currentTab ? Funcs::trans('messages.' . $this->currentTab) : Funcs::trans('messages.{{ name }}')) . ' - ' . Funcs::config('app.name');
 		}
 		else {
@@ -101,7 +104,7 @@ class {{ className }} extends BaseAdminPage {
 	}
 
 	public function afterLoad($adminPage) {
-//		if ($this->request->get('tab') == 'table') {
+//		if (in_array($this->request->get('tab'), ['table'])) {
 //			$this->table = new \{{ rootNamespace }}\app\Extras\Components\ListTables\Settings();
 //		}
 	}
@@ -117,8 +120,25 @@ class {{ className }} extends BaseAdminPage {
 	 */
 
 	public function index() {
-		if ($this->request->get('updated') && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
-			Funcs::notice(Funcs::trans('Updated successfully', true), 'success', !class_exists('\WPSPCORE\View\Blade'));
+		$updated = $this->request->get('updated') ?? null;
+
+		if ($updated && $this->parent_slug !== 'options-general.php' && $this->request->get('tab') !== 'table') {
+			if ($updated == 'custom-updated') {
+				Funcs::notice(
+					Funcs::trans('Custom updated successfully', true),
+					'success',
+					!class_exists('\{{ coreNamespace }}\View\Blade'
+					)
+				);
+			}
+			else {
+				Funcs::notice(
+					Funcs::trans('Updated successfully', true),
+					'success',
+					!class_exists('\{{ coreNamespace }}\View\Blade'
+					)
+				);
+			}
 		}
 
 //		$requestParams = $this->request->query->all();
@@ -144,37 +164,7 @@ class {{ className }} extends BaseAdminPage {
 	}
 
 	public function update() {
-//		try {
-//			$tab = $this->request->get('tab');
-//			if ($tab !== 'table') {
-//				$settings = $this->request->get('settings');
-//
-////			    $existSettings = Cache::getItemValue('settings');
-//				$existSettings = SettingsModel::query()->where('key','settings')->first();
-//				$existSettings = json_decode($existSettings['value'] ?? '', true);
-//				$existSettings = array_merge($existSettings ?? [], $settings ?? []);
-//
-//				// Save settings into cache.
-////			    Cache::set('settings', function() use ($existSettings) {
-////			    	return $existSettings;
-////			    });
-//
-//				// Delete license information cache.
-////				Cache::delete('license_information');
-//
-//				// Save settings into database.
-//				SettingsModel::updateOrCreate([
-//					'key' => 'settings',
-//				], [
-//					'value' => json_encode($existSettings),
-//				]);
-//			}
-//		}
-//		catch (\Exception|\Throwable $e) {
-//			Funcs::debug($e->getMessage());
-//		}
-
-		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
+//		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
 	}
 
 	/*
@@ -182,34 +172,15 @@ class {{ className }} extends BaseAdminPage {
 	 */
 
 	public function styles() {
-//		wp_enqueue_style(
-//			Funcs::config('app.short_name') . '-admin',
-//			Funcs::instance()->_getPublicUrl() . '/css/admin.min.css',
-//			null,
-//			Funcs::instance()->_getVersion()
-//		);
+//		wp_enqueue_style();
 	}
 
 	public function scripts() {
-//		wp_enqueue_script(
-//			Funcs::config('app.short_name') . '-database',
-//			Funcs::instance()->_getPublicUrl() . '/js/modules/web/admin-pages/wpsp/Database.min.js',
-//			null,
-//			Funcs::instance()->_getVersion(),
-//			true
-//		);
+//		wp_enqueue_script();
 	}
 
 	public function localizeScripts() {
-//		wp_localize_script(
-//			Funcs::config('app.short_name') . '-database',
-//			Funcs::config('app.short_name') . '_localize',
-//			[
-//				'ajax_url'   => admin_url('admin-ajax.php'),
-//				'nonce'      => wp_create_nonce(Funcs::config('app.short_name')),
-//				'public_url' => Funcs::instance()->_getPublicUrl(),
-//			]
-//		);
+//		wp_localize_script();
 	}
 
 }
