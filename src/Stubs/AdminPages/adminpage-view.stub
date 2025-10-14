@@ -127,16 +127,14 @@ class {{ className }} extends BaseAdminPage {
 				Funcs::notice(
 					Funcs::trans('Custom updated successfully', true),
 					'success',
-					!class_exists('\{{ coreNamespace }}\View\Blade'
-					)
+					!class_exists('\{{ coreNamespace }}\View\Blade')
 				);
 			}
 			else {
 				Funcs::notice(
 					Funcs::trans('Updated successfully', true),
 					'success',
-					!class_exists('\{{ coreNamespace }}\View\Blade'
-					)
+					!class_exists('\{{ coreNamespace }}\View\Blade')
 				);
 			}
 		}
