@@ -43,8 +43,8 @@ class MakeListenerCommand extends Command {
 		}
 
 		$stub = FileSystem::get(__DIR__ . '/../Stubs/Listeners/listener.stub');
-		$stub = str_replace('{{ rootNamespace }}', $this->rootNamespace, $stub);
 		$stub = str_replace('{{ className }}', $name, $stub);
+		$stub = $this->replaceNamespaces($stub);
 		FileSystem::put($path, $stub);
 
 		$output->writeln('Created new listener: "' . $name . '"');
