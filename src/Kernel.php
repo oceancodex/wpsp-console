@@ -7,6 +7,8 @@ use WPSPCORE\Console\Commands\MakeAjaxCommand;
 use WPSPCORE\Console\Commands\MakeAPICommand;
 use WPSPCORE\Console\Commands\MakeControllerCommand;
 use WPSPCORE\Console\Commands\MakeEntityCommand;
+use WPSPCORE\Console\Commands\MakeEventCommand;
+use WPSPCORE\Console\Commands\MakeListenerCommand;
 use WPSPCORE\Console\Commands\MakeListTableCommand;
 use WPSPCORE\Console\Commands\MakeMetaBoxCommand;
 use WPSPCORE\Console\Commands\MakeMiddlewareCommand;
@@ -34,6 +36,8 @@ class Kernel {
 			MakeAPICommand::class,
 			MakeControllerCommand::class,
 			MakeEntityCommand::class,
+			MakeEventCommand::class,
+			MakeListenerCommand::class,
 			MakeListTableCommand::class,
 			MakeMetaBoxCommand::class,
 			MakeMiddlewareCommand::class,
