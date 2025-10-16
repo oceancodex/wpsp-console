@@ -11,13 +11,14 @@ use Symfony\Component\Console\Question\Question;
 use WPSPCORE\Console\Traits\CommandsTrait;
 
 class MakeListenerCommand extends Command {
+
 	use CommandsTrait;
 
 	protected function configure() {
 		$this
 			->setName('make:listener')
-			->setDescription('Create a new Listener class.              | Eg: bin/wpsp make:listener SettingsUpdatedListener')
-			->addArgument('name', InputArgument::OPTIONAL, 'The class name of the listener.');
+			->setDescription('Create a new listener.                    | Eg: bin/wpsp make:listener UserCreatedListener')
+			->addArgument('name', InputArgument::OPTIONAL, 'The name of the listener.');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
@@ -25,7 +26,7 @@ class MakeListenerCommand extends Command {
 
 		$helper = $this->getHelper('question');
 		if (!$name) {
-			$q = new Question('Please enter the name of the listener: ');
+			$q    = new Question('Please enter the name of the listener: ');
 			$name = $helper->ask($input, $output, $q);
 			if (empty($name)) {
 				$output->writeln('Missing name for the listener. Please try again.');
@@ -41,13 +42,14 @@ class MakeListenerCommand extends Command {
 			return Command::FAILURE;
 		}
 
-		$stub = '';
-		$stub = str_replace('{{ rootNamespace }}', $this->rootNamespace, $stub);
+		$stub = FileSystem::get(__DIR__ . '/../Stubs/Listeners/listener.stub');
 		$stub = str_replace('{{ className }}', $name, $stub);
-
+		$stub = $this->replaceNamespaces($stub);
 		FileSystem::put($path, $stub);
+
 		$output->writeln('Created new listener: "' . $name . '"');
 
 		return Command::SUCCESS;
 	}
+
 }
