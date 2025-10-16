@@ -2,6 +2,7 @@
 
 namespace WPSPCORE\Console\Commands;
 
+use Symfony\Component\Console\Input\InputOption;
 use WPSPCORE\FileSystem\FileSystem;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -17,12 +18,14 @@ class MakeEventCommand extends Command {
 	protected function configure() {
 		$this
 			->setName('make:event')
-			->setDescription('Create a new Event class.                 | Eg: bin/wpsp make:event SettingsUpdated')
-			->addArgument('name', InputArgument::OPTIONAL, 'The class name of the event.');
+			->setDescription('Create a new event.                       | Eg: bin/wpsp make:event UsersCreatedEvent')
+			->addArgument('name', InputArgument::OPTIONAL, 'The name of the event.')
+			->addOption('listeners', 'listeners', InputOption::VALUE_OPTIONAL, 'The listeners of the event. (Eg: UserCreatedListener, UserDeletedListener)');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$name = $input->getArgument('name');
+		$listeners = $input->getOption('listeners');
 
 		$helper = $this->getHelper('question');
 		if (!$name) {
@@ -32,9 +35,14 @@ class MakeEventCommand extends Command {
 				$output->writeln('Missing name for the event. Please try again.');
 				return Command::INVALID;
 			}
+
+			$listenersQuestion = new Question('Please enter the class name of listeners for this event (separate by comma): ');
+			$listeners = $helper->ask($input, $output, $listenersQuestion);
 		}
 
 		$this->validateClassName($output, $name);
+		$listeners = preg_replace('/\s+/', '', $listeners);
+		$listeners = explode(',', $listeners);
 
 		$path = $this->mainPath . '/app/Events/' . $name . '.php';
 		if (FileSystem::exists($path)) {
@@ -42,11 +50,24 @@ class MakeEventCommand extends Command {
 			return Command::FAILURE;
 		}
 
-		$stub = '';
-		$stub = str_replace('{{ rootNamespace }}', $this->rootNamespace, $stub);
+		$stub = FileSystem::get(__DIR__ . '/../Stubs/Events/event.stub');
 		$stub = str_replace('{{ className }}', $name, $stub);
-
+		$stub = $this->replaceNamespaces($stub);
 		FileSystem::put($path, $stub);
+
+		// Prepare listeners HTML.
+		$listenersHTML = '';
+		foreach ($listeners as $listener) {
+			$listenersHTML .= "		\{{ rootNamespace }}\app\Listeners\\'.$listener.'::class,\n";
+		}
+		$listenersHTML = $this->replaceNamespaces($listenersHTML);
+
+		$configFile = FileSystem::get($this->mainPath . '/config/events.php');
+		$configFile = str_replace('{{ className }}', $name, $configFile);
+		$configFile = str_replace('{{ listeners }}', $listenersHTML, $configFile);
+		$configFile = $this->replaceNamespaces($configFile);
+		FileSystem::put($this->mainPath . '/config/events.php', $configFile);
+
 		$output->writeln('Created new event: "' . $name . '"');
 
 		return Command::SUCCESS;
