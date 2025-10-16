@@ -42,7 +42,7 @@ class MakeEventCommand extends Command {
 
 		$this->validateClassName($output, $name);
 		$listeners = preg_replace('/\s+/', '', $listeners);
-		$listeners = explode(',', $listeners);
+		$listeners = $listeners ? explode(',', $listeners) : null;
 
 		$path = $this->mainPath . '/app/Events/' . $name . '.php';
 		if (FileSystem::exists($path)) {
@@ -57,15 +57,24 @@ class MakeEventCommand extends Command {
 
 		// Prepare listeners HTML.
 		$listenersHTML = '';
-		foreach ($listeners as $listener) {
-			$listenersHTML .= "		\{{ rootNamespace }}\app\Listeners\\'.$listener.'::class,\n";
+		if ($listeners) {
+			foreach ($listeners as $key => $listener) {
+				if ($key > 0) {
+					$listenersHTML .= "		\{{ rootNamespace }}\app\Listeners\\$listener::class,\n";
+				}
+				else {
+					$listenersHTML .= "\{{ rootNamespace }}\app\Listeners\\$listener::class,\n";
+				}
+			}
 		}
 		$listenersHTML = $this->replaceNamespaces($listenersHTML);
 
+		$func = FileSystem::get(__DIR__ . '/../Funcs/Events/event.func');
+		$func = str_replace('{{ className }}', $name, $func);
+		$func = str_replace('{{ listeners }}', $listenersHTML, $func);
+		$func = $this->replaceNamespaces($func);
 		$configFile = FileSystem::get($this->mainPath . '/config/events.php');
-		$configFile = str_replace('{{ className }}', $name, $configFile);
-		$configFile = str_replace('{{ listeners }}', $listenersHTML, $configFile);
-		$configFile = $this->replaceNamespaces($configFile);
+		$configFile = str_replace('return [', "return [\n" . $func, $configFile);
 		FileSystem::put($this->mainPath . '/config/events.php', $configFile);
 
 		$output->writeln('Created new event: "' . $name . '"');
