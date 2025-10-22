@@ -18,7 +18,7 @@ class MakeTaxonomyColumnCommand extends Command {
 	protected function configure() {
 		$this
 			->setName('make:taxonomy-column')
-			->setDescription('Create a new taxonomy column.            | Eg: bin/wpsp make:taxonomy-column my_custom_column')
+			->setDescription('Create a new taxonomy column.             | Eg: bin/wpsp make:taxonomy-column my_custom_column')
 			->setHelp('This command allows you to create a custom column for taxonomy list table.')
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the taxonomy column.');
 	}
@@ -28,11 +28,11 @@ class MakeTaxonomyColumnCommand extends Command {
 
 		$helper = $this->getHelper('question');
 		if (!$name) {
-			$nameQuestion = new Question('Please enter the name of the post type column: ');
+			$nameQuestion = new Question('Please enter the name of the taxonomy column: ');
 			$name         = $helper->ask($input, $output, $nameQuestion);
 
 			if (empty($name)) {
-				$output->writeln('Missing name for the post type column. Please try again.');
+				$output->writeln('Missing name for the taxonomy column. Please try again.');
 				return Command::INVALID;
 			}
 		}
@@ -72,7 +72,7 @@ class MakeTaxonomyColumnCommand extends Command {
 		$this->addClassToRoute('TaxonomyColumns', 'taxonomy_columns', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new post type column: "' . $name . '"');
+		$output->writeln('Created new taxonomy column: "' . $name . '"');
 
 		return Command::SUCCESS;
 	}
