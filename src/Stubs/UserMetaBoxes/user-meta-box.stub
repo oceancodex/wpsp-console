@@ -58,7 +58,7 @@ class {{ className }} extends BaseUserMetaBox {
 //			Funcs::instance()->_getPublicUrl() . '/plugins/bootstrap/css/bootstrap-utilities.min.css',
 //			null,
 //			Funcs::instance()->_getVersion()
-		);
+//		);
 	}
 
 	public function scripts() {}
