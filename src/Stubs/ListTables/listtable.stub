@@ -68,7 +68,6 @@ class {{ className }} extends BaseListTable {
 	 */
 
 	public function get_data() {
-
 		try {
 //			$model = \{{ rootNamespace }}\app\Models\AccountsModel::query();
 			$model = \{{ rootNamespace }}\app\Models\SettingsModel::query();
@@ -234,7 +233,7 @@ class {{ className }} extends BaseListTable {
 
 			// Multi delete.
 			if ('delete' === $this->current_action()) {
-				$items = Funcs::instance()->request->get('items');
+				$items = $this->request->get('items');
 				if (!empty($items)) {
 					SettingsModel::query()->whereIn('id', $items)->delete();
 				}

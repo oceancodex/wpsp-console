@@ -3,10 +3,13 @@
 namespace {{ rootNamespace }}\app\Http\Controllers;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseController;
 
 class {{ className }} extends BaseController {
+
+	use InstancesTrait;
 
     public function index(\WP_REST_Request $request) {
 
