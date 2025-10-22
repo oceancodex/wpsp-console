@@ -9,6 +9,7 @@ use WPSPCORE\Console\Commands\MakeCommandCommand;
 use WPSPCORE\Console\Commands\MakeControllerCommand;
 use WPSPCORE\Console\Commands\MakeEntityCommand;
 use WPSPCORE\Console\Commands\MakeEventCommand;
+use WPSPCORE\Console\Commands\MakeExceptionCommand;
 use WPSPCORE\Console\Commands\MakeListenerCommand;
 use WPSPCORE\Console\Commands\MakeListTableCommand;
 use WPSPCORE\Console\Commands\MakeMetaBoxCommand;
@@ -39,6 +40,7 @@ class Kernel {
 			MakeControllerCommand::class,
 			MakeEntityCommand::class,
 			MakeEventCommand::class,
+			MakeExceptionCommand::class,
 			MakeListenerCommand::class,
 			MakeListTableCommand::class,
 			MakeMetaBoxCommand::class,
