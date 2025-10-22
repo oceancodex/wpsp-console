@@ -25,6 +25,7 @@ class MakeExceptionCommand extends Command {
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$name = $input->getArgument('name');
 
+		// If name is empty, ask questions.
 		$helper = $this->getHelper('question');
 		if (!$name) {
 			$q       = new Question('Please enter the name of the exception: ');
@@ -35,19 +36,25 @@ class MakeExceptionCommand extends Command {
 			}
 		}
 
+		// Validate class name.
 		$this->validateClassName($output, $name);
 
+		// Prepare class path.
 		$path = $this->mainPath . '/app/Exceptions/' . $name . '.php';
+
+		// Check exist.
 		if (FileSystem::exists($path)) {
 			$output->writeln('[ERROR] Exception: "' . $name . '" already exists! Please try again.');
 			return Command::FAILURE;
 		}
 
+		// Create class file.
 		$stub = FileSystem::get(__DIR__ . '/../Stubs/Exceptions/exception.stub');
 		$stub = str_replace('{{ className }}', $name, $stub);
 		$stub = $this->replaceNamespaces($stub);
 		FileSystem::put($path, $stub);
 
+		// Output message.
 		$output->writeln('Created new exception: "' . $name . '"');
 
 		return Command::SUCCESS;
