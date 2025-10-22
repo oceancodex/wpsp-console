@@ -18,6 +18,7 @@ use WPSPCORE\Console\Commands\MakeMigrationCommand;
 use WPSPCORE\Console\Commands\MakeModelCommand;
 use WPSPCORE\Console\Commands\MakeNavLocationCommand;
 use WPSPCORE\Console\Commands\MakeNavMenuCommand;
+use WPSPCORE\Console\Commands\MakePostTypeColumnCommand;
 use WPSPCORE\Console\Commands\MakePostTypeCommand;
 use WPSPCORE\Console\Commands\MakeRewriteFrontPageCommand;
 use WPSPCORE\Console\Commands\MakeRoleCommand;
@@ -49,6 +50,7 @@ class Kernel {
 			class_exists('\WPSPCORE\Database\Eloquent') ? MakeModelCommand::class : null,
 			MakeNavLocationCommand::class,
 			MakeNavMenuCommand::class,
+			MakePostTypeColumnCommand::class,
 			MakePostTypeCommand::class,
 			MakeRewriteFrontPageCommand::class,
 			MakeRoleCommand::class,
