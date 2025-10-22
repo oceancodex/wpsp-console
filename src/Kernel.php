@@ -25,6 +25,7 @@ use WPSPCORE\Console\Commands\MakeRoleCommand;
 use WPSPCORE\Console\Commands\MakeScheduleCommand;
 use WPSPCORE\Console\Commands\MakeSeederCommand;
 use WPSPCORE\Console\Commands\MakeShortcodeCommand;
+use WPSPCORE\Console\Commands\MakeTaxonomyColumnCommand;
 use WPSPCORE\Console\Commands\MakeTaxonomyCommand;
 use WPSPCORE\Console\Commands\MakeTemplateCommand;
 use WPSPCORE\Console\Commands\MigrationDiffCommand;
@@ -57,6 +58,7 @@ class Kernel {
 			MakeScheduleCommand::class,
 			MakeSeederCommand::class,
 			MakeShortcodeCommand::class,
+			MakeTaxonomyColumnCommand::class,
 			MakeTaxonomyCommand::class,
 			MakeTemplateCommand::class,
 
