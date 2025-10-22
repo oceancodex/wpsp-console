@@ -20,7 +20,7 @@ class MakeUserMetaBoxCommand extends Command {
 	protected function configure() {
 		$this
 			->setName('make:user-meta-box')
-			->setDescription('Create a new user meta box.                    | Eg: bin/wpsp make:user-meta-box custom_user_meta_box --create-view')
+			->setDescription('Create a new user meta box.               | Eg: bin/wpsp make:user-meta-box custom_user_meta_box --create-view')
 			->setHelp('This command allows you to create an user meta box.')
 			->addArgument('id', InputArgument::OPTIONAL, 'The id of the user meta box.')
 			->addOption('create-view', 'create-view', InputOption::VALUE_NONE, 'Create view files for this user meta box or not?');

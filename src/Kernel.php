@@ -28,6 +28,7 @@ use WPSPCORE\Console\Commands\MakeShortcodeCommand;
 use WPSPCORE\Console\Commands\MakeTaxonomyColumnCommand;
 use WPSPCORE\Console\Commands\MakeTaxonomyCommand;
 use WPSPCORE\Console\Commands\MakeTemplateCommand;
+use WPSPCORE\Console\Commands\MakeUserMetaBoxCommand;
 use WPSPCORE\Console\Commands\MigrationDiffCommand;
 use WPSPCORE\Console\Commands\MigrationMigrateCommand;
 
@@ -61,6 +62,7 @@ class Kernel {
 			MakeTaxonomyColumnCommand::class,
 			MakeTaxonomyCommand::class,
 			MakeTemplateCommand::class,
+			MakeUserMetaBoxCommand::class,
 
 			class_exists('\WPSPCORE\Migration\Migration') ? MigrationDiffCommand::class : null,
 			class_exists('\WPSPCORE\Migration\Migration') ? MigrationMigrateCommand::class : null,
