@@ -5,6 +5,7 @@ namespace WPSPCORE\Console;
 use WPSPCORE\Console\Commands\MakeAdminPageCommand;
 use WPSPCORE\Console\Commands\MakeAjaxCommand;
 use WPSPCORE\Console\Commands\MakeAPICommand;
+use WPSPCORE\Console\Commands\MakeCommandCommand;
 use WPSPCORE\Console\Commands\MakeControllerCommand;
 use WPSPCORE\Console\Commands\MakeEntityCommand;
 use WPSPCORE\Console\Commands\MakeEventCommand;
@@ -34,6 +35,7 @@ class Kernel {
 			MakeAdminPageCommand::class,
 			MakeAjaxCommand::class,
 			MakeAPICommand::class,
+			MakeCommandCommand::class,
 			MakeControllerCommand::class,
 			MakeEntityCommand::class,
 			MakeEventCommand::class,
