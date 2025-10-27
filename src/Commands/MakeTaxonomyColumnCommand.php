@@ -72,7 +72,7 @@ class MakeTaxonomyColumnCommand extends Command {
 		$this->addClassToRoute('TaxonomyColumns', 'taxonomy_columns', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new taxonomy column: "' . $name . '"');
+		$this->writeln($output, '<green>Created new taxonomy column: "' . $name . '"</green>');
 
 		return Command::SUCCESS;
 	}

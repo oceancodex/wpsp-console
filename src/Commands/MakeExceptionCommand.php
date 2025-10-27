@@ -55,7 +55,7 @@ class MakeExceptionCommand extends Command {
 		FileSystem::put($path, $stub);
 
 		// Output message.
-		$output->writeln('Created new exception: "' . $name . '"');
+		$this->writeln($output, '<green>Created new exception: "' . $name . '"</green>');
 
 		return Command::SUCCESS;
 	}

@@ -72,7 +72,7 @@ class MakePostTypeColumnCommand extends Command {
 		$this->addClassToRoute('PostTypeColumns', 'post_type_columns', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new post type column: "' . $name . '"');
+		$this->writeln($output, '<green>Created new post type column: "' . $name . '"</green>');
 
 		return Command::SUCCESS;
 	}

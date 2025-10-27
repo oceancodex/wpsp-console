@@ -70,7 +70,7 @@ class MakeRoleCommand extends Command {
 		$this->addClassToRoute('Roles', 'roles', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new role: "' . $name . '"');
+		$this->writeln($output, '<green>Created new role: "' . $name . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable

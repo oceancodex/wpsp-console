@@ -77,7 +77,7 @@ class MakeEventCommand extends Command {
 		$configFile = str_replace('return [', "return [\n" . $func, $configFile);
 		FileSystem::put($this->mainPath . '/config/events.php', $configFile);
 
-		$output->writeln('Created new event: "' . $name . '"');
+		$this->writeln($output, '<green>Created new event: "' . $name . '"</green>');
 
 		return Command::SUCCESS;
 	}

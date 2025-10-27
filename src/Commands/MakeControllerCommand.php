@@ -49,7 +49,7 @@ class MakeControllerCommand extends Command {
 		$stub = $this->replaceNamespaces($stub);
 		FileSystem::put($path, $stub);
 
-		$output->writeln('Created new controller: "' . $name . '"');
+		$this->writeln($output, '<green>Created new controller: "' . $name . '"</green>');
 
 		return Command::SUCCESS;
 	}

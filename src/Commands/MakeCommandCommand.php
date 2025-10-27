@@ -61,7 +61,7 @@ class MakeCommandCommand extends Command {
 		$configFile = str_replace('return [', "return [\n" . $func, $configFile);
 		FileSystem::put($this->mainPath . '/config/commands.php', $configFile);
 
-		$output->writeln('Created new command: "' . $commandSlugify . '" in "' . $name . '"');
+		$this->writeln($output, '<green>Created new command: "' . $commandSlugify . '" in "' . $name . '"</green>');
 
 		return Command::SUCCESS;
 	}

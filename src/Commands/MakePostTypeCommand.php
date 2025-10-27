@@ -70,7 +70,7 @@ class MakePostTypeCommand extends Command {
 		$this->addClassToRoute('PostTypes', 'post_types', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new post type: "' . $name . '"');
+		$this->writeln($output, '<green>Created new post type: "' . $name . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable

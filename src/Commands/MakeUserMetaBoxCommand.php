@@ -118,7 +118,7 @@ class MakeUserMetaBoxCommand extends Command {
 		$this->addClassToRoute('UserMetaBoxes', 'user_meta_boxes', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new user meta box: "' . $id . '"');
+		$this->writeln($output, '<green>Created new user meta box: "' . $id . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable

@@ -47,7 +47,7 @@ class MakeListenerCommand extends Command {
 		$stub = $this->replaceNamespaces($stub);
 		FileSystem::put($path, $stub);
 
-		$output->writeln('Created new listener: "' . $name . '"');
+		$this->writeln($output, '<green>Created new listener: "' . $name . '"</green>');
 
 		return Command::SUCCESS;
 	}
