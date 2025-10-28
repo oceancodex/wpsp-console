@@ -70,7 +70,7 @@ class MakeTaxonomyCommand extends Command {
 		$this->addClassToRoute('Taxonomies', 'taxonomies', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new taxonomy: "' . $name . '"');
+		$this->writeln($output, '<green>Created new taxonomy: "' . $name . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable

@@ -2,12 +2,15 @@
 
 namespace {{ rootNamespace }}\app\Extras\Components\RewriteFrontPages;
 
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseRewriteFrontPage;
 use {{ coreNamespace }}\Integration\RankmathSEO;
 use {{ coreNamespace }}\Integration\YoastSEO;
 
 class {{ name_slugify }} extends BaseRewriteFrontPage {
+
+	use InstancesTrait;
 
 //	public $path                     = null;
 	public $rewriteIdent             = '{{ path }}';

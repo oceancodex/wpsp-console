@@ -2,9 +2,12 @@
 
 namespace {{ rootNamespace }}\app\Extras\Components\PostTypes;
 
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BasePostType;
 
 class {{ className }} extends BasePostType {
+
+	use InstancesTrait;
 
 	/**
 	 * WordPress register post type docs.
