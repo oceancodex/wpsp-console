@@ -13,7 +13,6 @@ class {{ className }} extends BaseInstances {
 
 //	public function __construct($user) {
 //		parent::__construct();
-//
 //		$this->user = $user;
 //	}
 

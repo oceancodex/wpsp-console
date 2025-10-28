@@ -24,7 +24,7 @@ class MakeEventCommand extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$name = $input->getArgument('name');
+		$name      = $input->getArgument('name');
 		$listeners = $input->getOption('listeners');
 
 		$helper = $this->getHelper('question');
@@ -37,7 +37,7 @@ class MakeEventCommand extends Command {
 			}
 
 			$listenersQuestion = new Question('Please enter the class name of listeners for this event (separate by comma): ');
-			$listeners = $helper->ask($input, $output, $listenersQuestion);
+			$listeners         = $helper->ask($input, $output, $listenersQuestion);
 		}
 
 		$this->validateClassName($output, $name);
@@ -69,15 +69,15 @@ class MakeEventCommand extends Command {
 		}
 		$listenersHTML = $this->replaceNamespaces($listenersHTML);
 
-		$func = FileSystem::get(__DIR__ . '/../Funcs/Events/event.func');
-		$func = str_replace('{{ className }}', $name, $func);
-		$func = str_replace('{{ listeners }}', $listenersHTML, $func);
-		$func = $this->replaceNamespaces($func);
+		$func       = FileSystem::get(__DIR__ . '/../Funcs/Events/event.func');
+		$func       = str_replace('{{ className }}', $name, $func);
+		$func       = str_replace('{{ listeners }}', $listenersHTML, $func);
+		$func       = $this->replaceNamespaces($func);
 		$configFile = FileSystem::get($this->mainPath . '/config/events.php');
 		$configFile = str_replace('return [', "return [\n" . $func, $configFile);
 		FileSystem::put($this->mainPath . '/config/events.php', $configFile);
 
-		$output->writeln('Created new event: "' . $name . '"');
+		$this->writeln($output, '<green>Created new event: "' . $name . '"</green>');
 
 		return Command::SUCCESS;
 	}

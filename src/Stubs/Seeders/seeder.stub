@@ -5,12 +5,13 @@ namespace {{ rootNamespace }}\database\seeders;
 use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use {{ rootNamespace }}\app\Models\SettingsModel;
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseSeeder;
 
 class {{ className }} extends BaseSeeder {
 
-	use WithoutModelEvents;
+	use InstancesTrait, WithoutModelEvents;
 
 	public function run() {
 //		$faker = Faker::create('vi_VN');

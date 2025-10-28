@@ -1,0 +1,1 @@
+use {{ rootNamespace }}\app\Extras\Components\UserMetaBoxes\{{ id_slugify }};

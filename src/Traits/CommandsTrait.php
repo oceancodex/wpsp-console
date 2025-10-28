@@ -2,6 +2,8 @@
 
 namespace WPSPCORE\Console\Traits;
 
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Console\Output\OutputInterface;
 use WPSPCORE\FileSystem\FileSystem;
 use Symfony\Component\Console\Command\Command;
 use WPSPCORE\Funcs;
@@ -21,6 +23,30 @@ trait CommandsTrait {
 		$this->rootNamespace = $rootNamespace;
 		$this->prefixEnv     = $prefixEnv;
 		$this->funcs         = new Funcs($this->mainPath, $this->rootNamespace, $this->prefixEnv);
+	}
+
+	/*
+	 *
+	 */
+	protected function writeln(OutputInterface $output, string $message): void {
+		$style = new OutputFormatterStyle(null, 'green');
+		$output->getFormatter()->setStyle('success', $style);
+
+		$style = new OutputFormatterStyle('green');
+		$output->getFormatter()->setStyle('green', $style);
+
+		$style = new OutputFormatterStyle('red');
+		$output->getFormatter()->setStyle('red', $style);
+
+		$style = new OutputFormatterStyle('yellow');
+		$output->getFormatter()->setStyle('yellow', $style);
+
+		$tz = function_exists('wp_timezone') ? wp_timezone() : new \DateTimeZone('Asia/Ho_Chi_Minh');
+		$dt = new \DateTime('now', $tz);
+
+		$timestamp = '[' . $dt->format('Y-m-d H:i:s') . ']';
+
+		$output->writeln("{$timestamp} {$message}");
 	}
 
 	public function replaceNamespaces($content) {
