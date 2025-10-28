@@ -36,32 +36,22 @@ class MakeControllerCommand extends Command {
 			}
 		}
 
-		// Validate class name.
 		$this->validateClassName($output, $name);
 
-		// Create class file.
-		$content = FileSystem::get(__DIR__ . '/../Stubs/Controllers/controller.stub');
-		$content = str_replace('{{ className }}', $name, $content);
-		$content = $this->replaceNamespaces($content);
-		FileSystem::put($this->mainPath . '/app/Http/Controllers/' . $name . '.php', $content);
+		$path = $this->mainPath . '/app/Http/Controllers/' . $name . '.php';
+		if (FileSystem::exists($path)) {
+			$output->writeln('[ERROR] Controller: "' . $name . '" already exists! Please try again.');
+			return Command::FAILURE;
+		}
 
-		// Output message.
-		$output->writeln('Created new controller: "' . $name . '"');
+		$stub = FileSystem::get(__DIR__ . '/../Stubs/Controllers/controller.stub');
+		$stub = str_replace('{{ className }}', $name, $stub);
+		$stub = $this->replaceNamespaces($stub);
+		FileSystem::put($path, $stub);
 
-		// this method must return an integer number with the "exit status code"
-		// of the command. You can also use these constants to make code more readable
+		$this->writeln($output, '<green>Created new controller: "' . $name . '"</green>');
 
-		// return this if there was no problem running the command
-		// (it's equivalent to returning int(0))
 		return Command::SUCCESS;
-
-		// or return this if some error happened during the execution
-		// (it's equivalent to returning int(1))
-		// return Command::FAILURE;
-
-		// or return this to indicate incorrect command usage; e.g. invalid options
-		// or missing arguments (it's equivalent to returning int(2))
-		// return Command::INVALID
 	}
 
 }

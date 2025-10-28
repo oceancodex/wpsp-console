@@ -43,7 +43,7 @@ class MakeListTableCommand extends Command {
 		FileSystem::put($this->mainPath . '/app/Extras/Components/ListTables/' . $name . '.php', $content);
 
 		// Output message.
-		$output->writeln('Created new list table: "' . $name . '"');
+		$this->writeln($output, '<green>Created new list table: "' . $name . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable
