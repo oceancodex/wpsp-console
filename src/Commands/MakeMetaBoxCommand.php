@@ -55,14 +55,14 @@ class MakeMetaBoxCommand extends Command {
 
 		if ($createView) {
 			// Create a view file.
-			$view = FileSystem::get(__DIR__ . '/../Views/MetaBoxes/metabox.view');
+			$view = FileSystem::get(__DIR__ . '/../Views/MetaBoxes/meta-box.view');
 			$view = str_replace('{{ id }}', $id, $view);
 			$view = str_replace('{{ id_slugify }}', $idSlugify, $view);
 			FileSystem::put($this->mainPath . '/resources/views/modules/meta-boxes/' . $id . '.blade.php', $view);
-			$content = FileSystem::get(__DIR__ . '/../Stubs/MetaBoxes/metabox-view.stub');
+			$content = FileSystem::get(__DIR__ . '/../Stubs/MetaBoxes/meta-box-view.stub');
 		}
 		else {
-			$content = FileSystem::get(__DIR__ . '/../Stubs/MetaBoxes/metabox.stub');
+			$content = FileSystem::get(__DIR__ . '/../Stubs/MetaBoxes/meta-box.stub');
 		}
 
 		// Create class file.
@@ -73,12 +73,12 @@ class MakeMetaBoxCommand extends Command {
 		FileSystem::put($this->mainPath . '/app/Extras/Components/MetaBoxes/' . $idSlugify . '.php', $content);
 
 		// Prepare new line for find function.
-		$func = FileSystem::get(__DIR__ . '/../Funcs/MetaBoxes/metabox.func');
+		$func = FileSystem::get(__DIR__ . '/../Funcs/MetaBoxes/meta-box.func');
 		$func = str_replace('{{ id }}', $id, $func);
 		$func = str_replace('{{ id_slugify }}', $idSlugify, $func);
 
 		// Prepare new line for use class.
-		$use = FileSystem::get(__DIR__ . '/../Uses/MetaBoxes/metabox.use');
+		$use = FileSystem::get(__DIR__ . '/../Uses/MetaBoxes/meta-box.use');
 		$use = str_replace('{{ id }}', $id, $use);
 		$use = str_replace('{{ id_slugify }}', $idSlugify, $use);
 		$use = $this->replaceNamespaces($use);
@@ -87,7 +87,7 @@ class MakeMetaBoxCommand extends Command {
 		$this->addClassToRoute('MetaBoxes', 'meta_boxes', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new meta box: "' . $id . '"');
+		$this->writeln($output, '<green>Created new meta box: "' . $id . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable

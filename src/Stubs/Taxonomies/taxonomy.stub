@@ -2,9 +2,12 @@
 
 namespace {{ rootNamespace }}\app\Extras\Components\Taxonomies;
 
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ coreNamespace }}\Base\BaseTaxonomy;
 
 class {{ className }} extends BaseTaxonomy {
+
+	use InstancesTrait;
 
 //	public $taxonomy                   = '{{ name }}';
 //	public $object_type                = 'post';

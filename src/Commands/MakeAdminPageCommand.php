@@ -29,7 +29,7 @@ class MakeAdminPageCommand extends Command {
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$path = $input->getArgument('path');
 
-		// If path is empty.
+		// If path is empty, ask questions.
 		$helper = $this->getHelper('question');
 		if (!$path) {
 			$pathQuestion = new Question('Please enter the path of the admin page: ');
@@ -73,8 +73,8 @@ class MakeAdminPageCommand extends Command {
 		$content = $this->replaceNamespaces($content);
 		FileSystem::put($this->mainPath . '/app/Extras/Components/AdminPages/' . $nameSlugify . '.php', $content);
 
+		// Create view files.
 		if ($createView) {
-
 			$bladeExt    = class_exists('\WPSPCORE\View\Blade') ? '.blade.php' : '.php';
 			$nonBladeSep = class_exists('\WPSPCORE\View\Blade') ? '' : '/non-blade';
 
@@ -112,7 +112,6 @@ class MakeAdminPageCommand extends Command {
 			$view = str_replace('{{ path }}', $path, $view);
 			$view = str_replace('{{ path_slugify }}', $pathSlugify, $view);
 			FileSystem::put($this->mainPath . '/resources/views/modules/admin-pages/' . $path . '/navigation' . $bladeExt, $view);
-
 		}
 
 		// Prepare new line for find function.
@@ -134,7 +133,7 @@ class MakeAdminPageCommand extends Command {
 		$this->addClassToRoute('AdminPages', 'admin_pages', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new admin page: "' . $path . '"');
+		$this->writeln($output, '<green>Created new admin page: "' . $path . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable
