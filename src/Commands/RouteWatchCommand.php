@@ -15,7 +15,7 @@ class RouteWatchCommand extends Command {
 	protected function configure() {
 		$this
 			->setName('route:watch')
-			->setDescription('Watch route files & auto remap. | Eg: bin/wpsp route:watch')
+			->setDescription('Watch route files & auto remap.           | Eg: bin/wpsp route:watch')
 			->setHelp('Automatically remap routes when files in /routes directory are updated.')
 			->addOption('ide', null, InputOption::VALUE_OPTIONAL, 'Choose IDE to auto-reload. Supported: phpstorm');
 	}

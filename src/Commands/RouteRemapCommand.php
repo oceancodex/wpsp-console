@@ -17,7 +17,7 @@ class RouteRemapCommand extends Command {
 	protected function configure() {
 		$this
 			->setName('route:remap')
-			->setDescription('Remap routes.                   | Eg: bin/wpsp route:remap')
+			->setDescription('Remap routes.                             | Eg: bin/wpsp route:remap')
 			->setHelp('This command is used to remap routes...')
 			->addOption('ide', null, InputOption::VALUE_OPTIONAL, 'Choose IDE to auto-reload. Supported: phpstorm');
 	}
