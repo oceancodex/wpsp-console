@@ -2,10 +2,13 @@
 
 namespace {{ rootNamespace }}\app\Extras\Components\Templates;
 
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseTemplates;
 
 class {{ className }} extends BaseTemplates {
+
+	use InstancesTrait;
 
 //	public $name  = '{{ name }}';
 	public $label = '[{{ rootNamespace }}] Template: {{ name }}';
