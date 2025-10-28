@@ -2,10 +2,13 @@
 
 namespace {{ rootNamespace }}\app\Extras\Components\Shortcodes;
 
+use {{ rootNamespace }}\app\Traits\InstancesTrait;
 use {{ rootNamespace }}\Funcs;
 use {{ coreNamespace }}\Base\BaseShortcode;
 
 class {{ className }} extends BaseShortcode {
+
+	use InstancesTrait;
 
 //	public $shortcode = null;
 

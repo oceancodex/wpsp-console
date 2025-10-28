@@ -18,6 +18,9 @@ class {{ className }} extends BaseAdminPage {
 
 	use InstancesTrait;
 
+	/**
+	 * WordPress admin page properties.
+	 */
 	public $menu_title                  = '{{ name }}';
 //	public $page_title                  = '{{ name }}';
 	public $capability                  = 'manage_options';
@@ -30,6 +33,15 @@ class {{ className }} extends BaseAdminPage {
 //	public $urls_highlight_current_menu = null;
 //	public $callback_function           = null;
 
+	/**
+	 * Parent properties.
+	 */
+	protected $screen_options           = null;
+	protected $screen_options_key       = null;
+
+	/**
+	 * Custom properties.
+	 */
 //	private $checkDatabase              = null;
 	private $table                      = null;
 	private $currentTab                 = null;
@@ -47,10 +59,12 @@ class {{ className }} extends BaseAdminPage {
 //		$this->icon_url                    = '';
 //		$this->position                    = '';
 //		$this->parent_slug                 = '';
-//	    $this->callback_index              = false;
 //		$this->is_submenu_page             = true;
 //	    $this->remove_first_submenu        = false;
 //		$this->urls_highlight_current_menu = [];
+//      $this->callback_function           = null;
+//      $this->$screen_options             = null;
+//      $this->$screen_options_key         = null;
 
 		$this->currentTab  = $this->request->get('tab');
 		$this->currentPage = $this->request->get('page');
@@ -61,6 +75,10 @@ class {{ className }} extends BaseAdminPage {
 			$pageTitle = $this->currentTab ?? 'Dashboard';
 			$this->page_title = Funcs::trans(ucfirst($pageTitle), true);
 		}
+//		$this->screen_options_key = $this->getQueryStringSlugify(['page', 'tab']);
+//		if (in_array($this->currentTab, ['table', 'roles', 'permissions', 'users'])) {
+//			$this->screen_options = true;
+//		}
 	}
 
 	/*
@@ -74,7 +92,18 @@ class {{ className }} extends BaseAdminPage {
 //      // Your code here...
 //	}
 
-	public function beforeInit() {}
+	public function beforeInit() {
+		if (!Auth::instance()->guard('web')->check() && $this->currentTab == 'users') {
+			// Test AuthenticationException.
+//			throw new AuthenticationException('Vui lòng đăng nhập để xem users', ['web'], admin_url('admin.php?page=wpsp'));
+
+			// Test QueryException.
+//			global $wpdb;
+//			$data = ['title' => 'Test'];
+//			$result = $wpdb->update($wpdb->posts, $data, ['ID' => 1]);
+//			throw new \WPSP\app\Exceptions\QueryException($wpdb->last_query, $data, 'Failed to update post');
+		}
+	}
 
 	public function afterInit() {
 		// Custom highlight current menu.
@@ -162,6 +191,10 @@ class {{ className }} extends BaseAdminPage {
 	}
 
 	public function update() {
+		// Validate sử dụng FormRequest.
+//		$request = new SettingsUpdateRequest();
+//		$request->validated();
+
 //		wp_safe_redirect(wp_get_raw_referer() . '&updated=true');
 	}
 
@@ -170,7 +203,18 @@ class {{ className }} extends BaseAdminPage {
 	 */
 
 	public function styles() {
-//		wp_enqueue_style();
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-grid',
+			Funcs::instance()->_getPublicUrl() . '/plugins/bootstrap/css/bootstrap-grid.min.css',
+			null,
+			Funcs::instance()->_getVersion()
+		);
+		wp_enqueue_style(
+			Funcs::config('app.short_name') . '-bootstrap-utilities',
+			Funcs::instance()->_getPublicUrl() . '/plugins/bootstrap/css/bootstrap-utilities.min.css',
+			null,
+			Funcs::instance()->_getVersion()
+		);
 	}
 
 	public function scripts() {

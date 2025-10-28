@@ -88,7 +88,7 @@ class MakeScheduleCommand extends Command {
 		$this->addClassToRoute('Schedules', 'schedules', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new schedule: "' . $hook . '"');
+		$this->writeln($output, '<green>Created new schedule: "' . $hook . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable

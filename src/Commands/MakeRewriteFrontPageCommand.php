@@ -124,7 +124,7 @@ class MakeRewriteFrontPageCommand extends Command {
 		$this->addClassToRoute('RewriteFrontPages', 'rewrite_front_pages', $func, $use);
 
 		// Output message.
-		$output->writeln('Created new rewrite front page: "' . $path . '"');
+		$this->writeln($output, '<green>Created new rewrite front page: "' . $path . '"</green>');
 
 		// this method must return an integer number with the "exit status code"
 		// of the command. You can also use these constants to make code more readable
