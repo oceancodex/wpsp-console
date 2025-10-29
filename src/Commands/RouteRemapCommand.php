@@ -33,17 +33,17 @@ class RouteRemapCommand extends Command {
 				$test = @mysqli_connect($host, $user, $password);
 				if (!$test) {
 					$this->writeln($output, '<red>Unable to connect to database, please check your wp-config.php or .env to make sure the database connection information is declared correctly.</red>');
-					return Command::INVALID;
+					return Command::FAILURE;
 				}
 			}
 			catch (\Throwable $e) {
 				$this->writeln($output, '<red>Database server not found. Please make sure your database server is running and the database connection information in wp-config.php or .env is correct.</red>');
-				return Command::INVALID;
+				return Command::FAILURE;
 			}
 		}
 		else {
 			$this->writeln($output, '<red>WP Config not found or database connection information in .env file is not configured.</red>');
-			return Command::INVALID;
+			return Command::FAILURE;
 		}
 
 		require $this->funcs->_getSitePath('/wp-config.php');
@@ -53,7 +53,7 @@ class RouteRemapCommand extends Command {
 		if (empty($routeMap)) {
 			$output->writeln('<error>No routes found!</error>');
 			$output->writeln('<info>You must make sure that your Database Server is running.</info>');
-			return Command::INVALID;
+			return Command::FAILURE;
 		}
 
 		$pluginDirName = $this->funcs->_getPluginDirName();
