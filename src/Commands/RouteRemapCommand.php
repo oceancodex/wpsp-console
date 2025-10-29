@@ -37,7 +37,7 @@ class RouteRemapCommand extends Command {
 					return Command::INVALID;
 				}
 			}
-			catch (\Exception $e) {
+			catch (\Throwable $e) {
 				$this->writeln($output, '<red>Database server not found. Please make sure your database server is running and the database connection information in wp-config.php or .env is correct.</red>');
 				return Command::INVALID;
 			}

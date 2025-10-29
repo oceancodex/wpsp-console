@@ -65,7 +65,7 @@ class MigrationMigrateCommand extends Command {
 				$databaseSeeder = $namespace . '\\database\\seeders\\DatabaseSeeder';
 				(new $databaseSeeder($output))->run();
 			}
-			catch (\Exception $e) {
+			catch (\Throwable $e) {
 				$output->writeln('<fg=red>' . $e->getMessage() . '  </>');
 			}
 		}
