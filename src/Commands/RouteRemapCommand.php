@@ -6,7 +6,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use WPSP\app\Extras\Instances\Routes\MapRoutes;
 use WPSPCORE\Console\Traits\CommandsTrait;
 use WPSPCORE\FileSystem\FileSystem;
 
@@ -49,7 +48,7 @@ class RouteRemapCommand extends Command {
 
 		require $this->funcs->_getSitePath('/wp-config.php');
 
-		$routeMap = MapRoutes::instance()->mapIdea;
+		$routeMap = $this->mapRoutes->mapIdea ?? [];
 
 		if (empty($routeMap)) {
 			$output->writeln('<error>No routes found!</error>');
