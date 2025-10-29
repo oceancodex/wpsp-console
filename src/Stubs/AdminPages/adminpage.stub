@@ -127,7 +127,7 @@ class {{ className }} extends BaseAdminPage {
 //				}
 //			}
 //		}
-//		catch (\Exception|\Throwable $e) {
+//		catch (\Throwable $e) {
 //			Funcs::debug($e->getMessage());
 //		}
 	}
@@ -185,7 +185,7 @@ class {{ className }} extends BaseAdminPage {
 
 			echo '<div class="wrap"><h1>Admin page: "{{ name }}"</h1></div>';
 		}
-		catch (\Exception|\Throwable $e) {
+		catch (\Throwable $e) {
 			Funcs::notice($e->getMessage() . ' <code>(' . __CLASS__ . ')</code>', 'error', true, true);
 		}
 	}
