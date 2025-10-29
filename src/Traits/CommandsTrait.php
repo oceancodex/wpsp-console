@@ -8,14 +8,18 @@ use WPSPCORE\FileSystem\FileSystem;
 use Symfony\Component\Console\Command\Command;
 use WPSPCORE\Funcs;
 
+/**
+ * @property Funcs $funcs
+ */
 trait CommandsTrait {
 
 	public $mainPath      = null;
 	public $rootNamespace = null;
 	public $prefixEnv     = null;
-	/** @var Funcs|null */
+
 	public $funcs         = null;
 	public $coreNamespace = 'WPSPCORE';
+	public $mapRoutes     = null;
 
 	public function __construct($name = null, $mainPath = null, $rootNamespace = null, $prefixEnv = null) {
 		parent::__construct($name);
@@ -23,6 +27,7 @@ trait CommandsTrait {
 		$this->rootNamespace = $rootNamespace;
 		$this->prefixEnv     = $prefixEnv;
 		$this->funcs         = new Funcs($this->mainPath, $this->rootNamespace, $this->prefixEnv);
+		$this->customProperties();
 	}
 
 	/*
@@ -49,6 +54,10 @@ trait CommandsTrait {
 		$output->writeln("{$timestamp} {$message}");
 	}
 
+	/*
+	 *
+	 */
+
 	public function replaceNamespaces($content) {
 		$content = str_replace('{{ rootNamespace }}', $this->rootNamespace, $content);
 		return str_replace('{{ coreNamespace }}', $this->coreNamespace, $content);
@@ -60,6 +69,8 @@ trait CommandsTrait {
 			exit(Command::INVALID);
 		}
 	}
+
+	public function customProperties() {}
 
 	/*
 	 *
