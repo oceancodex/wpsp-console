@@ -1,1 +1,1 @@
-# WordPress Starter Plugin - Console
+# WordPress Starter Plugin - Consolex
