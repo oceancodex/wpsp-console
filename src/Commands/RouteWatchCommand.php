@@ -21,9 +21,10 @@ class RouteWatchCommand extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-		$watchDir = $this->funcs->_getMainPath('/routes');
-		$ide      = strtolower($input->getOption('ide') ?? null);
-		$ideStr   = $ide ? " --ide={$ide}" : null;
+		$watchDir              = $this->funcs->_getMainPath('/routes');
+		$ide                   = strtolower($input->getOption('ide') ?? null);
+		$ideStr                = $ide ? " --ide={$ide}" : null;
+		$ignoreActivePluginStr = ' --ignore-active-plugin=true';
 
 		if (!is_dir($watchDir)) {
 			$this->writeln($output, "<error>Directory not found: {$watchDir}</error>");
@@ -41,7 +42,7 @@ class RouteWatchCommand extends Command {
 			if ($newHashes !== $hashes) {
 				$hashes = $newHashes;
 				$this->writeln($output, "<yellow>Change detected. Remapping...</yellow>");
-				exec('php ' . escapeshellarg($this->funcs->_getMainPath('/bin/wpsp')) . ' route:remap' . $ideStr);
+				exec('php ' . escapeshellarg($this->funcs->_getMainPath('/bin/wpsp')) . ' route:remap' . $ideStr . $ignoreActivePluginStr);
 				$this->writeln($output, "<green>Remap routes successfully!</green>");
 				$this->writeln($output, "<green>Watching...</green>");
 			}
