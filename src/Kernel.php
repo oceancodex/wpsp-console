@@ -34,7 +34,7 @@ use WPSPCORE\Console\Commands\MigrationMigrateCommand;
 
 class Kernel {
 
-	public static function initCommands($application, $mainPath, $rootNamespace, $prefixEnv) {
+	public static function initCommands($application, $mainPath, $rootNamespace, $prefixEnv, $extraParams = []) {
 		$commands = [
 			MakeAdminPageCommand::class,
 			MakeAjaxCommand::class,
@@ -68,7 +68,7 @@ class Kernel {
 			class_exists('\WPSPCORE\Migration\Migration') ? MigrationMigrateCommand::class : null,
 		];
 		foreach ($commands as $command) {
-			if ($command) $application->add(new $command(null, $mainPath, $rootNamespace, $prefixEnv));
+			if ($command) $application->add(new $command(null, $mainPath, $rootNamespace, $prefixEnv, $extraParams));
 		}
 	}
 

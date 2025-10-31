@@ -20,13 +20,34 @@ trait CommandsTrait {
 	public $funcs         = null;
 	public $coreNamespace = 'WPSPCORE';
 	public $mapRoutes     = null;
+	public $request       = null;
+	public $validation    = null;
+	public $environment   = null;
 
-	public function __construct($name = null, $mainPath = null, $rootNamespace = null, $prefixEnv = null) {
+	public $extraParams   = [];
+
+	public function __construct($name = null, $mainPath = null, $rootNamespace = null, $prefixEnv = null, $extraParams = []) {
 		parent::__construct($name);
 		$this->mainPath      = $mainPath;
 		$this->rootNamespace = $rootNamespace;
 		$this->prefixEnv     = $prefixEnv;
-		$this->funcs         = new Funcs($this->mainPath, $this->rootNamespace, $this->prefixEnv);
+		$this->funcs         = new Funcs($this->mainPath, $this->rootNamespace, $this->prefixEnv, [
+			'environment'        => $extraParams['environment'] ?? null,
+			'validation'         => null,
+
+			'prepare_funcs'      => false,
+			'prepare_request'    => true,
+
+			'unset_funcs'        => true,
+			'unset_request'      => false,
+			'unset_validation'   => true,
+			'unset_environment'  => false,
+
+			'unset_extra_params' => true,
+		]);
+		$this->extraParams = $extraParams;
+		$this->environment = $extraParams['environment'] ?? null;
+		$this->validation = $extraParams['validation'] ?? null;
 		$this->customProperties();
 	}
 
