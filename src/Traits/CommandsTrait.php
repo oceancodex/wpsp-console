@@ -18,16 +18,18 @@ trait CommandsTrait {
 	public $prefixEnv     = null;
 
 	public $funcs         = null;
-	public $coreNamespace = 'WPSPCORE';
-	public $mapRoutes     = null;
 	public $request       = null;
 	public $validation    = null;
 	public $environment   = null;
 
+	public $coreNamespace = 'WPSPCORE';
+	public $mapRoutes     = null;
+	public $eloquent      = null;
+
 	public $extraParams   = [];
 
-	public function __construct($name = null, $mainPath = null, $rootNamespace = null, $prefixEnv = null, $extraParams = []) {
-		parent::__construct($name);
+	public function __construct($mainPath = null, $rootNamespace = null, $prefixEnv = null, $extraParams = []) {
+		parent::__construct();
 		$this->mainPath      = $mainPath;
 		$this->rootNamespace = $rootNamespace;
 		$this->prefixEnv     = $prefixEnv;

@@ -65,7 +65,7 @@ class Kernel {
 			MakeUserMetaBoxCommand::class,
 
 			class_exists('\WPSPCORE\Migration\Migration') ? MigrationDiffCommand::class : null,
-			class_exists('\WPSPCORE\Migration\Migration') ? MigrationMigrateCommand::class : null,
+//			class_exists('\WPSPCORE\Migration\Migration') ? MigrationMigrateCommand::class : null,
 		];
 		foreach ($commands as $command) {
 			if ($command) $application->add(new $command(null, $mainPath, $rootNamespace, $prefixEnv, $extraParams));
