@@ -22,7 +22,7 @@ class RouteWatchCommand extends Command {
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$watchDir              = $this->funcs->_getMainPath('/routes');
-		$ide                   = strtolower($input->getOption('ide') ?? null);
+		$ide                   = strtolower($input->getOption('ide') ?? '');
 		$ideStr                = $ide ? " --ide={$ide}" : null;
 		$ignoreActivePluginStr = ' --ignore-active-plugin=true';
 
