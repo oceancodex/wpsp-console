@@ -14,7 +14,7 @@ class FilteredOutput extends Output {
 		$this->original = $original;
 	}
 
-	protected function doWrite($message, $newline) {
+	protected function doWrite($message, $newline): void {
 		// Bỏ qua các dòng cảnh báo Doctrine mặc định
 		if (stripos($message, 'WARNING! You are about to execute a migration') !== false) {
 			return;
