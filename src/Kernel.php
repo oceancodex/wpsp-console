@@ -31,10 +31,17 @@ use WPSPCORE\Console\Commands\MakeTemplateCommand;
 use WPSPCORE\Console\Commands\MakeUserMetaBoxCommand;
 use WPSPCORE\Console\Commands\MigrationDiffCommand;
 use WPSPCORE\Console\Commands\MigrationMigrateCommand;
+use WPSPCORE\Console\Commands\RouteRemapCommand;
+use WPSPCORE\Console\Commands\RouteWatchCommand;
 
 class Kernel {
 
-	public static function initCommands($application, $mainPath, $rootNamespace, $prefixEnv, $extraParams = []) {
+	/**
+	 * $extraParams = ['funcs', 'eloquent', 'environment', 'application']
+	 */
+	public static function initCommands($mainPath, $rootNamespace, $prefixEnv, $extraParams = []) {
+		$application = $extraParams['application'] ?? null;
+		if (!$application) return;
 		$commands = [
 			MakeAdminPageCommand::class,
 			MakeAjaxCommand::class,
@@ -64,11 +71,14 @@ class Kernel {
 			MakeTemplateCommand::class,
 			MakeUserMetaBoxCommand::class,
 
+			RouteRemapCommand::class,
+			RouteWatchCommand::class,
+
 			class_exists('\WPSPCORE\Migration\Migration') ? MigrationDiffCommand::class : null,
-//			class_exists('\WPSPCORE\Migration\Migration') ? MigrationMigrateCommand::class : null,
+			class_exists('\WPSPCORE\Migration\Migration') ? MigrationMigrateCommand::class : null,
 		];
 		foreach ($commands as $command) {
-			if ($command) $application->add(new $command(null, $mainPath, $rootNamespace, $prefixEnv, $extraParams));
+			if ($command) $application->add(new $command($mainPath, $rootNamespace, $prefixEnv, $extraParams));
 		}
 	}
 

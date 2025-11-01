@@ -10,6 +10,10 @@ use WPSPCORE\Funcs;
 
 /**
  * @property Funcs $funcs
+ * @property \Symfony\Component\HttpFoundation\Request|\WPSPCORE\Validation\RequestWithValidation $request
+ * @property \WPSPCORE\Database\Eloquent $eloquent
+ * @property \WPSPCORE\Validation\Validation $validation
+ * @property \WPSPCORE\Environment\Environment $evironment
  */
 trait CommandsTrait {
 
@@ -19,37 +23,28 @@ trait CommandsTrait {
 
 	public $funcs         = null;
 	public $request       = null;
+	public $eloquent      = null;
 	public $validation    = null;
 	public $environment   = null;
 
-	public $coreNamespace = 'WPSPCORE';
 	public $mapRoutes     = null;
-	public $eloquent      = null;
+	public $coreNamespace = 'WPSPCORE';
 
 	public $extraParams   = [];
 
+	/**
+	 * $extraParams = ['funcs', 'application', 'environment']
+	 */
 	public function __construct($mainPath = null, $rootNamespace = null, $prefixEnv = null, $extraParams = []) {
 		parent::__construct();
 		$this->mainPath      = $mainPath;
 		$this->rootNamespace = $rootNamespace;
 		$this->prefixEnv     = $prefixEnv;
-		$this->funcs         = new Funcs($this->mainPath, $this->rootNamespace, $this->prefixEnv, [
-			'environment'        => $extraParams['environment'] ?? null,
-			'validation'         => null,
 
-			'prepare_funcs'      => false,
-			'prepare_request'    => true,
-
-			'unset_funcs'        => true,
-			'unset_request'      => false,
-			'unset_validation'   => true,
-			'unset_environment'  => false,
-
-			'unset_extra_params' => true,
-		]);
-		$this->extraParams = $extraParams;
-		$this->environment = $extraParams['environment'] ?? null;
-		$this->validation = $extraParams['validation'] ?? null;
+		$this->funcs         = $extraParams['funcs'] ?? null;
+		$this->eloquent      = $extraParams['eloquent'] ?? null;
+		$this->mapRoutes     = $extraParams['mapRoutes'] ?? null;
+		$this->environment   = $extraParams['environment'] ?? null;
 		$this->customProperties();
 	}
 
@@ -100,7 +95,7 @@ trait CommandsTrait {
 	 */
 
 	public function getRouteContent($routeName) {
-		return FileSystem::get($this->mainPath . '/routes/'.$routeName.'.php');
+		return FileSystem::get($this->mainPath . '/routes/' . $routeName . '.php');
 	}
 
 	/*
@@ -108,7 +103,7 @@ trait CommandsTrait {
 	 */
 
 	public function saveRouteContent($routeName, $content): void {
-		FileSystem::put($this->mainPath . '/routes/'.$routeName.'.php', $content);
+		FileSystem::put($this->mainPath . '/routes/' . $routeName . '.php', $content);
 	}
 
 	/*
@@ -119,7 +114,7 @@ trait CommandsTrait {
 		$routeContent = $this->getRouteContent($routeName);
 		$routeContent = preg_replace('/public function ' . $findFunction . '([\S\s]*?)\{/iu', 'public function ' . $findFunction . "$1{\n" . $newLineForFindFunction, $routeContent);
 		if (!strpos($routeContent, $newLineUseClass) !== false) {
-			$routeContent = preg_replace('/(\n\s*)class '.$routeName.' extends/iu', "\n" . $newLineUseClass . '$1class '.$routeName.' extends', $routeContent);
+			$routeContent = preg_replace('/(\n\s*)class ' . $routeName . ' extends/iu', "\n" . $newLineUseClass . '$1class ' . $routeName . ' extends', $routeContent);
 		}
 		$this->saveRouteContent($routeName, $routeContent);
 	}

@@ -27,7 +27,7 @@ class MigrationMigrateCommand extends Command {
 		$fresh = $input->getOption('fresh');
 		if ($fresh) {
 			if (class_exists('\WPSPCORE\Database\Eloquent')) {
-				$this->eloquent->dropAllDatabaseTables();
+				$dropDatabaseTables = $this->eloquent->dropAllDatabaseTables();
 				$output->writeln('<fg=green>Fresh database tables successfully!</>');
 			}
 		}
@@ -52,20 +52,20 @@ class MigrationMigrateCommand extends Command {
 		}
 
 		// Seeders.
-//		$seed = $input->getOption('seed');
-//		if ($seed) {
-//			try {
-//				$namespace      = $this->funcs->_getRootNamespace();
-//				$databaseSeeder = $namespace . '\\database\\seeders\\DatabaseSeeder';
-//				(new $databaseSeeder($this->mainPath, $this->rootNamespace, $this->prefixEnv, [
-//					'funcs'              => $this->funcs,
-//					'environment'        => $this->environment ?? null
-//				]))->run();
-//			}
-//			catch (\Throwable $e) {
-//				$output->writeln('<fg=red>' . $e->getMessage() . '  </>');
-//			}
-//		}
+		$seed = $input->getOption('seed');
+		if ($seed) {
+			try {
+				$namespace      = $this->funcs->_getRootNamespace();
+				$databaseSeeder = $namespace . '\\database\\seeders\\DatabaseSeeder';
+				(new $databaseSeeder($this->mainPath, $this->rootNamespace, $this->prefixEnv, [
+					'funcs'       => $this->funcs,
+					'environment' => $this->environment,
+				]))->run();
+			}
+			catch (\Throwable $e) {
+				$output->writeln('<fg=red>' . $e->getMessage() . '  </>');
+			}
+		}
 
 		return Command::SUCCESS;
 	}
