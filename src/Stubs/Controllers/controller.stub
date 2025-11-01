@@ -47,4 +47,8 @@ class {{ className }} extends BaseController {
         //
     }
 
+    public function forceDestroy(\WP_REST_Request $request) {
+        //
+    }
+
 }
