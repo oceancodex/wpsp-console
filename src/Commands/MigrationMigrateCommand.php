@@ -2,12 +2,15 @@
 
 namespace WPSPCORE\Console\Commands;
 
+use Doctrine\Migrations\Tools\Console\Command\MigrateCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use WPSPCORE\Console\Commands\Helpers\FilteredOutput;
 use WPSPCORE\Console\Traits\CommandsTrait;
-use WPSPCORE\Database\Eloquent;
 
 class MigrationMigrateCommand extends Command {
 
@@ -23,70 +26,99 @@ class MigrationMigrateCommand extends Command {
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int {
-
 		// Fresh database.
 		$fresh = $input->getOption('fresh');
 		if ($fresh) {
-			require_once $this->funcs->_getSitePath() . '/wp-load.php';
 			if (class_exists('\WPSPCORE\Database\Eloquent')) {
-				(new Eloquent(
-					$this->funcs->_getMainPath(),
-					$this->funcs->_getRootNamespace(),
-					$this->funcs->_getPrefixEnv()
-				))->global();
-				$this->funcs->_getAppEloquent()->dropAllDatabaseTables();
+				$output->writeln('<fg=yellow>Dropping all database tables...</>');
+				$dropDatabaseTables = $this->eloquent->dropAllDatabaseTables();
+				$output->writeln('');
+				$output->writeln('<fg=green>> All database tables have been dropped successfully!</>');
 			}
 		}
 
 		// Migrate.
-		exec('php bin/migrations migrate -n', $execOutput, $exitCode);
-
-		foreach ($execOutput as $execOutputKey => $execOutputItem) {
-			if (empty($execOutputItem)) {
-				unset($execOutput[$execOutputKey]);
-			}
-		}
-
-		foreach ($execOutput as $execOutputItem) {
-			$execOutputItem = trim($execOutputItem);
-			if (preg_match('/\[OK|\[Success/iu', $execOutputItem)) {
-				$output->writeln('<fg=green>' . $execOutputItem . '  </>');
-			}
-			else {
-				$output->writeln($execOutputItem);
-			}
-		}
+		$this->runDoctrineMigrations($output);
 
 		// Seeders.
 		$seed = $input->getOption('seed');
 		if ($seed) {
 			try {
+				$output->writeln('');
+				$output->writeln('<fg=yellow>Running seeders...</>');
+				$output->writeln('');
+
 				$namespace      = $this->funcs->_getRootNamespace();
 				$databaseSeeder = $namespace . '\\database\\seeders\\DatabaseSeeder';
-				(new $databaseSeeder($output))->run();
+				(new $databaseSeeder($this->mainPath, $this->rootNamespace, $this->prefixEnv, [
+					'funcs'       => $this->funcs,
+					'environment' => $this->environment,
+					'output'      => $output,
+				]))->run();
+
+				$output->writeln('');
+				$output->writeln('<fg=green>> Seeders completed successfully!</>');
 			}
 			catch (\Throwable $e) {
-				$output->writeln('<fg=red>' . $e->getMessage() . '  </>');
+				$output->writeln('');
+				$output->writeln('<fg=red>Seeder error: ' . $e->getMessage() . '</>');
 			}
 		}
 
-		// Output message.
-//		$output->writeln('Migrated.');
-
-		// this method must return an integer number with the "exit status code"
-		// of the command. You can also use these constants to make code more readable
-
-		// return this if there was no problem running the command
-		// (it's equivalent to returning int(0))
 		return Command::SUCCESS;
+	}
 
-		// or return this if some error happened during the execution
-		// (it's equivalent to returning int(1))
-		// return Command::FAILURE;
+	protected function runDoctrineMigrations(OutputInterface $output) {
+		$output->writeln('');
+		$output->write('<fg=yellow>Running Doctrine migrations directly...</>');
 
-		// or return this to indicate incorrect command usage; e.g. invalid options
-		// or missing arguments (it's equivalent to returning int(2))
-		// return Command::INVALID
+		// 1️⃣ Lấy DependencyFactory từ file cấu hình
+		$configFile        = $this->funcs->_getMainPath('/cli-config.php');
+		$dependencyFactory = require $configFile;
+
+		// 2️⃣ Khởi tạo command
+		$migrate = new MigrateCommand($dependencyFactory);
+
+		// ✅ Giả lập nhập "yes"
+		$input       = new ArrayInput([]);
+		$inputStream = fopen('php://memory', 'r+', false);
+		fwrite($inputStream, "yes\n");
+		rewind($inputStream);
+
+		// Gắn helperset để command có thể đọc input
+		$helperSet = $migrate->getHelperSet();
+		if (!$helperSet) {
+			$helperSet = new HelperSet();
+			$migrate->setHelperSet($helperSet);
+		}
+
+		// Trick để ép Symfony dùng stream này làm input
+		if (method_exists($input, 'setStream')) {
+			$input->setStream($inputStream);
+		}
+		else {
+			// Symfony < 5: dùng reflection
+			$ref = new \ReflectionObject($input);
+			if ($ref->hasProperty('stream')) {
+				$prop = $ref->getProperty('stream');
+				$prop->setAccessible(true);
+				$prop->setValue($input, $inputStream);
+			}
+		}
+
+		// 🔥 Bọc output bằng FilteredOutput để ẩn cảnh báo & câu hỏi
+		$filteredOutput = new FilteredOutput($output);
+
+		$exitCode = $migrate->run($input, $filteredOutput);
+
+		fclose($inputStream);
+
+		if ($exitCode === 0) {
+			$output->writeln('<fg=green>> Migrations completed successfully!</>');
+		}
+		else {
+			$output->writeln('<fg=red>Migrations exited with code ' . $exitCode . '</>');
+		}
 	}
 
 }
