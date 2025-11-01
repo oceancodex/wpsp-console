@@ -17,7 +17,7 @@ class MakeRequestCommand extends Command {
 	protected function configure() {
 		$this
 			->setName('make:request')
-			->setDescription('Create a new request.                      | Eg: bin/wpsp make:request UsersCreateRequest')
+			->setDescription('Create a new request.                     | Eg: bin/wpsp make:request UsersCreateRequest')
 			->addArgument('name', InputArgument::OPTIONAL, 'The name of the request.');
 	}
 
